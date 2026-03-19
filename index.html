@@ -16,7 +16,7 @@
   <style>
     body {
       font-family: 'Prompt', sans-serif;
-      background: linear-gradient(180deg, #f7faf9 0%, #e9f3ef 100%);
+      background: linear-gradient(180deg, #ffffff 0%, #f0f8f4 100%);
       font-size: 16px;
       color: #333;
       padding-bottom: 60px;
@@ -29,15 +29,15 @@
       padding: 0 15px;
     }
 
-    /* Header หลักของหน้า */
+    /* Header หลักของหน้า (โทนสีสว่างขึ้น) */
     .card-header-main {
-      background: linear-gradient(90deg, #006633, #008040);
+      background: linear-gradient(90deg, #00994d, #00cc66);
       color: white;
       text-align: center;
       border-radius: 15px 15px 0 0;
       padding: 20px 10px;
       margin-top: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     }
 
     .card-header-main p {
@@ -45,47 +45,30 @@
       font-size: 1.25rem;
     }
 
-    /* การตั้งค่า Card หลัก (ยุบรวมแล้ว) */
+    /* การตั้งค่า Card หลัก */
     .card-custom {
       background: #ffffff;
       border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
       margin-bottom: 25px;
       overflow: hidden;
-      border: 1px solid #e0e0e0;
-      padding: 20px; /* เพิ่ม padding จากแบบเก่า */
-    }
-
-    .card-sub {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid #eef2f0;
       padding: 20px;
-      margin-top: 20px;
     }
 
-    .choice-bg {
-      background-color: #f8f9fa;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      max-width: 100%;
-      margin: auto;
-    }
-
-    /* แถบหัวข้อภายใน Card ทีม */
+    /* แถบหัวข้อภายใน Card ทีม (โทนสีสว่างขึ้น) */
     .team-header-banner {
-      background: linear-gradient(135deg, #006633 0%, #2e7d32 100%);
+      background: linear-gradient(135deg, #00994d 0%, #33cc66 100%);
       color: white;
       padding: 15px;
       text-align: center;
-      margin: -20px -20px 20px -20px; /* ขยายให้ชิดขอบการ์ด */
+      margin: -20px -20px 20px -20px; 
       font-weight: 600;
       letter-spacing: 0.5px;
     }
 
     .card-body-padding {
-      padding: 5px 0; /* ปรับให้พอดีกับ card-custom padding */
+      padding: 5px 0; 
     }
 
     /* ข้อความแจ้งเตือน */
@@ -109,7 +92,7 @@
     }
 
     .form-label-custom i {
-      color: #006633;
+      color: #00994d;
       margin-right: 5px;
     }
 
@@ -118,23 +101,23 @@
       width: 100%;
       padding: 0.6rem 1rem;
       font-size: 1rem;
-      color: blue !important; /* ตามความต้องการเดิมของคุณ */
-      background-color: #f8f9fa;
+      color: #0000ff !important; 
+      background-color: #fcfdfd;
       border: 1px solid #ced4da;
       border-radius: 8px;
       transition: all 0.2s ease-in-out;
     }
 
     .form-select-custom:focus {
-      border-color: #006633;
+      border-color: #00994d;
       outline: 0;
-      box-shadow: 0 0 0 0.25rem rgba(0, 102, 51, 0.1);
+      box-shadow: 0 0 0 0.25rem rgba(0, 153, 77, 0.15);
       background-color: #fff;
     }
 
     /* Drop Zone สำหรับอัปโหลด */
     .drop-zone {
-      border: 2px dashed #ccc;
+      border: 2px dashed #b3e6cc;
       padding: 60px;
       text-align: center;
       cursor: pointer;
@@ -143,19 +126,19 @@
       transition: all 0.3s;
     }
 
-    .drop-zone:hover { border-color: #006633; background-color: #f0f7f4; }
+    .drop-zone:hover { 
+      border-color: #00994d; 
+      background-color: #f0fdf5; 
+    }
+
+    .drop-zone .upload-content i {
+      font-size: 3rem;
+      color: #00994d;
+      margin-bottom: 15px;
+    }
 
     /* Utility */
     .hidden-team { display: none; }
-
-    .card-footer-custom {
-      background: linear-gradient(90deg, #006633, #008040);
-      color: white;
-      padding: 10px;
-      text-align: center;
-      border-radius: 0 0 15px 15px;
-      font-size: 0.85rem;
-    }
 
     #preview-image, #qrImage {
       max-width: 100%;
@@ -179,6 +162,7 @@
     <div class="card-header-main">
       <p><strong>ชำระเงินค่าลงทะเบียนแข่งขัน ฯ / Pay Registration</strong></p>
     </div>
+    
     <form id="myForm" onsubmit="submitForm(); return false;">
       <div class="card-custom" id="preface">
         <p class="fs-6 mb-0"><strong><u>ขั้นตอนการชำระเงิน</u><span class="text-muted"> (Payment Procedure)</span></strong></p>
@@ -199,7 +183,7 @@
             Upload receipt and choose to request a tax invoice, receipt, or none, and save the information.
           </span>
         </p>
-        <p class="fs-6 mb-2"> ● หากท่านมีข้อสงสัยหรือสอบถามข้อมูลเพิ่มเติม สามารถติดต่อได้ที่เบอร์ 02-459-4731 ต่อ 232 หรือ Line OA : Events Gammaco (ในวันทำการ จันทร์-ศุกร์ เวลา 8.30 - 17.00 น.)
+        <p class="fs-6 mb-2"> ● หากท่านมีข้อสงสัยหรือสอบถามข้อมูลเพิ่มเติม สามารถติดต่อได้ที่เบอร์ 02-459-4731 ต่อ 232 หรือ Line OA : @wrothailand (ในวันทำการ จันทร์-ศุกร์ เวลา 8.30 - 17.00 น.)
           <span style="display: block; font-size: 0.8em; color: #babdbf; width: 90%; margin-top: 5px; padding-left: 20px;">
             If you have any questions or need further information, you can contact us at 02-459-4731 ext. 232 or via Line OA: Events Gammaco (Monday to Friday, 8:30 AM - 5:00 PM).
           </span>
@@ -207,7 +191,7 @@
         <hr>
         <p class="fs-6 mb-3" style="color: red;"><i class="fa-regular fa-bookmark"></i><strong> เลือกจำนวนทีมที่ท่านต้องการชำระเงิน (Select the number of teams you want to pay for)</strong></p>
         <div class="form-group col-md-4 d-flex flex-column mb-3">
-          <select id="teamCount" class="fs-5" style="width: 300px; height: 40px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 5px;" onchange="showSelectedTeam()">
+          <select id="teamCount" class="form-select-custom fs-5" style="width: 300px; height: 45px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);" onchange="showSelectedTeam()">
             <option value="" selected disabled>-- กรุณาเลือก --</option>
             <option value="1">1 ทีม</option>
             <option value="2">2 ทีม</option>
@@ -224,55 +208,46 @@
       </div>
 
       <script>
-        // Generate Team HTML Blocks Dynamically to keep code clean and readable
         for (let i = 1; i <= 10; i++) {
-          const suffix = (i === 1) ? "" : (i - 1).toString();
-          const teamHeader = (i === 1) 
-            ? `<div class="team-header-banner"><strong class="fs-5">Team ${i}</strong></div>`
-            : `<div class="row my-3 mx-auto"><p class="fs-5 text-center mb-4 team-title"><strong>Team ${i}</strong></p><hr>`;
-          
-          const alertInfo = (i === 1) 
-            ? `<div class="alert-info-text"><i class="fa-solid fa-circle-info"></i> ประเภท Robomission และ Future Innovators: กรุณาเลือกรุ่นการแข่งขันของท่าน</div>`
-            : '';
+          let suffix = (i === 1) ? "" : (i - 1).toString();
+          let alertHtml = (i === 1) 
+            ? `<div class="alert-info-text"><i class="fa-solid fa-circle-info"></i> ประเภท Robomission และ Future Innovators: กรุณาเลือกรุ่นการแข่งขันของท่าน</div>` 
+            : ``;
 
-          const classRowDiv = (i === 1) ? `<div class="row g-3">` : `<div class="row my-2 mx-auto">`;
-          const classCol6 = (i === 1) ? `col-md-6` : `form-group col-md-6 d-flex flex-column mb-3`;
-          
-          const labelA = (i === 1) ? `<label class="form-label-custom"><i class="fa-solid fa-graduation-cap"></i> รุ่นอายุ / Age Group</label>` : `<p class="fw-bold mb-1" style="font-size:18px; color:black;" for="colA${suffix}"><i class="fa-solid fa-podcast"></i> รุ่นอายุ / Age Group </p>`;
-          const selectA = `<select class="${i===1 ? 'form-select-custom' : 'form-control selectpicker show-tick'}" id="colA${suffix}" ${i===1?'required':''}><option value="" selected>Choose</option></select>`;
-          
-          const labelB = (i === 1) ? `<label class="form-label-custom"><i class="fa-solid fa-id-badge"></i> ทีมไอดี / Team ID</label>` : `<p class="fw-bold mb-1" style="font-size:18px; color:black;" for="colB${suffix}"><i class="fa-solid fa-podcast"></i> ทีมไอดี / Team ID </p>`;
-          const selectB = `<select class="${i===1 ? 'form-select-custom' : 'form-control selectpicker show-tick'}" id="colB${suffix}" ${i===1?'required':''}><option value="" selected>Choose</option></select>`;
-
-          const colCClass = (i === 1) ? `col-md-5` : `form-group col-md-5 d-flex flex-column mb-3`;
-          const styleC = (i === 1) ? `` : `style="display: none;"`;
-          const labelC = (i === 1) ? `<label class="form-label-custom"><i class="fa-solid fa-pen-to-square"></i> ชื่อทีม / Team Name</label>` : `<p class="fw-bold mb-1" style="font-size:18px; color:black;" for="colC${suffix}"><i class="fa-solid fa-pen-to-square"></i> ชื่อทีม / Team Name </p>`;
-          const selectC = `<select class="${i===1 ? 'form-select-custom' : 'form-control selectpicker show-tick'}" id="colC${suffix}" ${i===1?'required':''}><option value=""></option></select>`;
-
-          const colDClass = (i === 1) ? `col-md-7` : `form-group col-md-7 d-flex flex-column mb-3`;
-          const styleD = (i === 1) ? `` : `style="display: none;"`;
-          const labelD = (i === 1) ? `<label class="form-label-custom"><i class="fa-solid fa-building-columns"></i> สถาบัน / Institution</label>` : `<p class="fw-bold mb-1" style="font-size:18px; color:black;" for="colD${suffix}"><i class="fa-solid fa-city"></i> สถาบัน / Institution </p>`;
-          const selectD = `<select class="${i===1 ? 'form-select-custom' : 'form-control selectpicker show-tick'}" id="colD${suffix}"><option value=""></option></select>`;
-
-          const extraDivEnd = (i === 1) ? `` : `</div>`;
-
-          document.write(`
-            <div class="card-custom hidden-team" id="team${i}">
-              ${teamHeader}
-              <div class="${i===1 ? 'card-body-padding' : 'row my-2 mx-auto'}">
-                ${alertInfo}
-                ${classRowDiv}
-                  <div class="${classCol6}"> ${labelA} ${selectA} </div>
-                  <div class="${classCol6}"> ${labelB} ${selectB} </div>
+          let teamHtml = `
+          <div class="card-custom hidden-team" id="team${i}">
+            <div class="team-header-banner"><strong class="fs-5">Team ${i}</strong></div>
+            <div class="card-body-padding">
+              ${alertHtml}
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label-custom"><i class="fa-solid fa-graduation-cap"></i> รุ่นอายุ / Age Group</label>
+                  <select class="form-select-custom" id="colA${suffix}" required>
+                    <option value="" selected>Choose</option>
+                  </select>
                 </div>
-                <div class="${classRowDiv}">
-                  <div class="${colCClass}" id="teamNameGroup" ${styleC}> ${labelC} ${selectC} </div>
-                  <div class="${colDClass}" id="institutionGroup" ${styleD}> ${labelD} ${selectD} </div>
+                <div class="col-md-6">
+                  <label class="form-label-custom"><i class="fa-solid fa-id-badge"></i> ทีมไอดี / Team ID</label>
+                  <select class="form-select-custom" id="colB${suffix}" required>
+                    <option value="" selected>Choose</option>
+                  </select>
                 </div>
-              ${extraDivEnd}
+                <div class="col-md-5">
+                  <label class="form-label-custom"><i class="fa-solid fa-pen-to-square"></i> ชื่อทีม / Team Name</label>
+                  <select class="form-select-custom" id="colC${suffix}" required>
+                    <option value=""></option>
+                  </select>
+                </div>
+                <div class="col-md-7">
+                  <label class="form-label-custom"><i class="fa-solid fa-building-columns"></i> สถาบัน / Institution</label>
+                  <select class="form-select-custom" id="colD${suffix}">
+                    <option value=""></option>
+                  </select>
+                </div>
               </div>
             </div>
-          `);
+          </div>`;
+          document.write(teamHtml);
         }
       </script>
 
@@ -319,7 +294,7 @@
                 <i class="fa-solid fa-cloud-arrow-up"></i>
                 <div class="upload-text">
                   <strong>Upload a File</strong>
-                  <p>Drag and drop files here or click to upload</p>
+                  <p class="text-muted">Drag and drop files here or click to upload</p>
                 </div>
               </div>
               <img id="preview-image" src="" alt="Preview" class="preview-img d-none" />
@@ -338,7 +313,7 @@
           </div>
           <div class="form-group col-md-4" id="contact_phone">
             <label class="mb-2" for="data18" style="font-size: 16px;"><i class="fa-solid fa-phone"></i> เบอร์โทรศัพท์ / Phone No. <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="data18" placeholder="เบอร์โทรศัพท์ที่สามารถติดต่อได้" style="font-size: 16px;" required>
+            <input type="text" class="form-control" id="data18" placeholder="เบอร์โทรศัพท์" style="font-size: 16px;" required>
           </div>
           <div class="form-group col-md-3" id="contact_lineid">
             <label class="mb-2" for="data55" style="font-size: 16px;"><i class="fa-brands fa-line"></i> ไลน์ไอดี / Line ID</label>
@@ -378,24 +353,24 @@
         </div>
         <div class="row my-2 mx-auto">
           <div class="form-group col-md-6 mb-3" id="tax_institution">
-            <label class="mb-2" for="tax_institution"><i class="far fa-building"></i> ชื่อบริษัท / Company Name</label>
+            <label class="mb-2 form-label-custom" for="data9"><i class="far fa-building"></i> ชื่อบริษัท / Company Name</label>
             <input type="text" class="form-control" id="data9" placeholder="ระบุชื่อหน่วยงาน / สถาบัน" >
           </div>
           <div class="form-group col-md-6" id="tax_id"> 
-            <label class="mb-2" for="tax_id"><i class="far fa-address-card"></i> เลขประจำตัวผู้เสียภาษี / Tax ID</label>
+            <label class="mb-2 form-label-custom" for="data10"><i class="far fa-address-card"></i> เลขประจำตัวผู้เสียภาษี / Tax ID</label>
             <input type="number" class="form-control" id="data10" placeholder="ระบุเลขที่ผู้เสียภาษี" minlength="13" maxlength="13">
           </div>
         </div>
         <div class="row my-2 mx-auto" id="tax_address">
           <div class="form-group col-md-12 mb-2">
-            <label class="mb-2" for="tax_address"><i class="fas fa-address-card"></i> ที่อยู่ / Address</label>
+            <label class="mb-2 form-label-custom" for="data11"><i class="fas fa-address-card"></i> ที่อยู่ / Address</label>
             <textarea class="form-control" rows="3" id="data11" placeholder="โปรดระบุที่อยู่"></textarea>
           </div>
         </div>
 
         <div class="row my-2 mx-auto" id="document">
           <div class="form-group col-md-12 mb-3">
-            <p class="fw-bold"><i class="fas fa-home"></i> การจัดส่งเอกสาร <span class="text-muted"> (Document Delivery)</span></p>
+            <p class="fw-bold"><i class="fas fa-home" style="color: #00994d;"></i> การจัดส่งเอกสาร <span class="text-muted"> (Document Delivery)</span></p>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="data12" id="id1" value="ตามใบเสร็จ" >
               <label class="form-check-label" for="id1">จัดส่งที่อยู่ตามใบเสร็จ <span class="text-muted"> (Address as per Receipt)</label>
@@ -409,17 +384,17 @@
 
         <div class="row my-2 mx-auto" >
           <div class="form-group col-md-6" id="doc_name">
-            <label class="mb-2" for="doc_name"><i class="fas fa-user"></i> ชื่อ-สกุล / Name-Surname (ผู้รับเอกสาร)</label>
+            <label class="mb-2 form-label-custom" for="data13"><i class="fas fa-user"></i> ชื่อ-สกุล / Name-Surname (ผู้รับเอกสาร)</label>
             <input type="text" class="form-control" id="data13" placeholder="Name">
           </div>
           <div class="form-group col-md-6" id="doc_phone">
-            <label class="mb-2" for="doc_phone"><i class="fas fa-mobile-alt"></i> เบอร์โทรศัพท์ / Phone No.</label>
+            <label class="mb-2 form-label-custom" for="data14"><i class="fas fa-mobile-alt"></i> เบอร์โทรศัพท์ / Phone No.</label>
             <input type="tel" class="form-control" id="data14" placeholder="เบอร์โทร" >
           </div>
         </div>
         <div class="row my-2 mx-auto" id="doc_address">
           <div class="form-group col-md-12">
-            <label class="mb-2" for="doc_address"><i class="fas fa-address-card"></i> ที่อยู่ / Address</label>
+            <label class="mb-2 form-label-custom" for="data15"><i class="fas fa-address-card"></i> ที่อยู่ / Address</label>
             <textarea class="form-control" rows="3" id="data15" placeholder="Address"></textarea>
           </div>
         </div>
@@ -431,7 +406,7 @@
           <div class="form-group col-md-12">
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="data16" id="firm" value="Waiting" required>
-              <label class="form-check-label" for="firm"><i class="far fa-check-circle"></i> ข้าพเจ้าได้กรอกข้อมูลครบถ้วนแล้ว <span class="text-muted">(I have completed filling out all the required information.)</span></label>
+              <label class="form-check-label" for="firm"><i class="far fa-check-circle" style="color: #00994d;"></i> ข้าพเจ้าได้กรอกข้อมูลครบถ้วนแล้ว <span class="text-muted">(I have completed filling out all the required information.)</span></label>
             </div>
           </div>
         </div>
@@ -439,23 +414,22 @@
       <br>          
 
       <div class="form-group text-center my-3">
-        <button type="submit" class="btn btn-danger btn-block" id="btn1"><i class="fas fa-save"></i> บันทึกข้อมูล</button>
+        <button type="submit" class="btn btn-danger btn-block" style="padding: 10px 30px; border-radius: 8px; font-size: 1.1rem;" id="btn1"><i class="fas fa-save"></i> บันทึกข้อมูล</button>
       </div>
     </form>
 
     <p class="mb-0" style="font-size: 14px; font-weight: bold; text-align: right;">Ver. 2026-7.0</p>
-    <div class="card-footer" style="background: linear-gradient(90deg, #00744d, #00a36c); color: white; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 0 0 10px 10px;">
+    <div class="card-footer" style="background: linear-gradient(90deg, #00994d, #00cc66); color: white; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 0 0 10px 10px;">
       <p class="text-center mb-0" style="font-size: 14px;"><strong>Organized by Gammaco (Thailand) Co., LTD.</strong></p>
     </div>
   </div>
 
   <script>
     // =========================================================================
-    // 🔴 กำหนด URL ของ Google Apps Script ของคุณที่นี่
+    // 🔴 กำหนด URL ของ Google Apps Script ของคุณที่นี่ (หลังจาก Deploy ใหม่)
     // =========================================================================
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-g6J80h6etivW4XWl0GfUbJTuljY29DKTHKF89ZLwhue_Biij0EA8MlLe3scj-W8X/exec'; 
+    const SCRIPT_URL = 'ใส่_URL_WEB_APP_ของ_GAS_ที่นี่'; 
 
-    // ดึงค่า userId และ userProfile จาก URL (ถ้ามี)
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('userId') || 'unknown_user';
     const userProfile = urlParams.get('userProfile') || 'unknown_profile';
@@ -592,7 +566,6 @@
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-      // 🔴 เปลี่ยนจากการใช้ google.script.run เป็น fetch API ดึงข้อมูลจากฝั่ง Backend
       fetch(SCRIPT_URL + '?method=getData')
         .then(response => response.json())
         .then(data => initDropdowns(data))
@@ -729,7 +702,6 @@
             willOpen: () => { Swal.showLoading(); }
           });
 
-          // 🔴 เปลี่ยนเป็น fetch POST ส่งข้อมูลไปหา Google Apps Script
           fetch(SCRIPT_URL, {
             method: 'POST',
             body: JSON.stringify({ method: 'saveData', data: fileData })
