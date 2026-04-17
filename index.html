@@ -412,7 +412,7 @@
       </div>
     </form>
 
-    <p class="mb-0" style="font-size: 14px; font-weight: bold; text-align: right;">Ver. 2026-8.5</p>
+    <p class="mb-0" style="font-size: 14px; font-weight: bold; text-align: right;">Ver. 2026-8.6</p>
     <div class="card-footer" style="background: linear-gradient(90deg, #00744d, #00a36c); color: white; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 0 0 10px 10px;">
       <p class="text-center mb-0" style="font-size: 14px;"><strong>Organized by Gammaco (Thailand) Co., LTD.</strong></p>
     </div>
@@ -549,55 +549,77 @@
       document.getElementById('lang-en').classList.toggle('active', lang === 'en');
 
       const t = trans[lang];
-      document.getElementById('txt-main-title').innerText = t.main_title;
-      document.getElementById('txt-step-title').innerHTML = `<u>${t.step_title}</u>`;
-      document.getElementById('txt-step1').innerText = t.step1;
-      document.getElementById('txt-step1-note').innerText = t.step1_note;
-      document.getElementById('txt-step2').innerText = t.step2;
-      document.getElementById('txt-step3').innerText = t.step3;
-      document.getElementById('txt-step4').innerText = t.step4;
-      document.getElementById('txt-select-team').innerText = t.select_team;
-      document.getElementById('txt-dropdown-hint').innerText = t.dropdown_hint;
       
-      // Update dynamic parts
-      $('.alert-team-info').each(function() { $(this).html(`<i class="fa-solid fa-circle-info"></i> ${t.team_info}`); });
-      $('.lbl-age').each(function() { $(this).html(`<i class="fa-solid fa-graduation-cap"></i> ${t.lbl_age}`); });
-      $('.lbl-tid').each(function() { $(this).html(`<i class="fa-solid fa-id-badge"></i> ${t.lbl_tid}`); });
-      $('.lbl-tname').each(function() { $(this).html(`<i class="fa-solid fa-pen-to-square"></i> ${t.lbl_tname}`); });
-      $('.lbl-inst').each(function() { $(this).html(`<i class="fa-solid fa-building-columns"></i> ${t.lbl_inst}`); });
+      // 1. เปลี่ยนข้อความแบบ ID (มีจุดเดียวในหน้า)
+      const ids = [
+        'txt-main-title', 'txt-step1', 'txt-step1-note', 'txt-step2', 'txt-step3', 
+        'txt-step4', 'txt-select-team', 'txt-dropdown-hint', 'txt-pay-method', 
+        'txt-pay-qr', 'txt-pay-acc', 'txt-bank-name', 'txt-acc-name', 'txt-acc-no', 
+        'txt-upload-label', 'txt-upload-title', 'txt-upload-hint', 'txt-contact-title', 
+        'txt-doc-title', 'txt-tax-history', 'txt-delivery', 'txt-verify-hint', 
+        'txt-btn-save'
+      ];
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (id === 'txt-step-title') el.innerHTML = `<u>${t.step_title}</u>`;
+          else el.innerText = t[id.replace('txt-', '').replace(/-/g, '_')];
+        }
+      });
 
-      document.getElementById('txt-pay-method').innerText = t.pay_method;
-      document.getElementById('txt-pay-qr').innerText = t.pay_qr;
-      document.getElementById('txt-pay-acc').innerText = t.pay_acc;
-      document.getElementById('txt-bank-name').innerText = t.bank_name;
-      document.getElementById('txt-acc-name').innerText = t.acc_name;
-      document.getElementById('txt-acc-no').innerText = t.acc_no;
-      document.getElementById('txt-upload-label').innerText = t.upload_label;
-      document.getElementById('txt-upload-title').innerText = t.upload_title;
-      document.getElementById('txt-upload-hint').innerText = t.upload_hint;
-      document.getElementById('txt-contact-title').innerText = t.contact_title;
-      $('.lbl-cname').each(function() { $(this).html(`<i class="fa-solid fa-circle-user"></i> ${t.cname}`); });
-      $('.lbl-cphone').each(function() { $(this).html(`<i class="fa-solid fa-phone"></i> ${t.cphone}`); });
-      $('.lbl-cline').each(function() { $(this).html(`<i class="fa-brands fa-line"></i> ${t.cline}`); });
-      document.getElementById('txt-doc-title').innerText = t.doc_title;
-      $('.lbl-doc-tax').innerText = t.doc_tax;
-      $('.lbl-doc-bill').innerText = t.doc_bill;
-      $('.lbl-doc-no').innerText = t.doc_no;
-      document.getElementById('txt-tax-history').innerText = t.tax_history;
-      $('.lbl-yes').innerText = t.yes;
-      $('.lbl-no').innerText = t.no;
-      $('.lbl-comp').each(function() { $(this).html(`<i class="far fa-building"></i> ${t.comp}`); });
-      $('.lbl-taxid').each(function() { $(this).html(`<i class="far fa-address-card"></i> ${t.taxid}`); });
-      $('.lbl-addr').each(function() { $(this).html(`<i class="fas fa-address-card"></i> ${t.addr}`); });
-      document.getElementById('txt-delivery').innerText = t.delivery;
-      $('.lbl-del-bill').innerText = t.del_bill;
-      $('.lbl-del-new').innerText = t.del_new;
-      $('.lbl-rname').each(function() { $(this).html(`<i class="fas fa-user"></i> ${t.rname}`); });
-      $('.lbl-rphone').each(function() { $(this).html(`<i class="fas fa-mobile-alt"></i> ${t.rphone}`); });
-      $('.lbl-raddr').each(function() { $(this).html(`<i class="fas fa-address-card"></i> ${t.raddr}`); });
-      document.getElementById('txt-verify-hint').innerText = t.verify_hint;
-      $('.lbl-confirm').each(function() { $(this).html(`<i class="far fa-check-circle"></i> ${t.confirm}`); });
-      document.getElementById('txt-btn-save').innerText = t.btn_save;
+      // 2. เปลี่ยนข้อความแบบ Class (มีหลายจุด หรืออยู่ในลูปทีม)
+      const classMap = {
+        'alert-team-info': t.team_info,
+        'lbl-age': `<i class="fa-solid fa-graduation-cap"></i> ${t.lbl_age}`,
+        'lbl-tid': `<i class="fa-solid fa-id-badge"></i> ${t.lbl_tid}`,
+        'lbl-tname': `<i class="fa-solid fa-pen-to-square"></i> ${t.lbl_tname}`,
+        'lbl-inst': `<i class="fa-solid fa-building-columns"></i> ${t.lbl_inst}`,
+        'lbl-cname': `<i class="fa-solid fa-circle-user"></i> ${t.cname}`,
+        'lbl-cphone': `<i class="fa-solid fa-phone"></i> ${t.cphone}`,
+        'lbl-cline': `<i class="fa-brands fa-line"></i> ${t.cline}`,
+        'lbl-doc-tax': t.doc_tax,
+        'lbl-doc-bill': t.doc_bill,
+        'lbl-doc-no': t.doc_no,
+        'lbl-yes': t.yes,
+        'lbl-no': t.no,
+        'lbl-comp': `<i class="far fa-building"></i> ${t.comp}`,
+        'lbl-taxid': `<i class="far fa-address-card"></i> ${t.taxid}`,
+        'lbl-addr': `<i class="fas fa-address-card"></i> ${t.addr}`,
+        'lbl-del-bill': t.del_bill,
+        'lbl-del-new': t.del_new,
+        'lbl-rname': `<i class="fas fa-user"></i> ${t.rname}`,
+        'lbl-rphone': `<i class="fas fa-mobile-alt"></i> ${t.rphone}`,
+        'lbl-raddr': `<i class="fas fa-address-card"></i> ${t.raddr}`,
+        'lbl-confirm': `<i class="far fa-check-circle"></i> ${t.confirm}`
+      };
+
+      Object.keys(classMap).forEach(className => {
+        document.querySelectorAll('.' + className).forEach(el => {
+          el.innerHTML = classMap[className];
+        });
+      });
+
+      // 3. เปลี่ยน Placeholder (สำหรับช่องกรอกข้อมูล)
+      const placeholders = {
+        'data17': lang === 'th' ? 'ชื่อ-นามสกุล' : 'Name-Surname',
+        'data18': lang === 'th' ? 'เบอร์โทรศัพท์ที่สามารถติดต่อได้' : 'Phone Number',
+        'data55': lang === 'th' ? 'Line ID' : 'Line ID',
+        'data9': lang === 'th' ? 'ระบุชื่อหน่วยงาน / สถาบัน' : 'Company / Institution Name',
+        'data10': lang === 'th' ? 'ระบุเลขที่ผู้เสียภาษี' : 'Tax ID Number',
+        'data11': lang === 'th' ? 'โปรดระบุที่อยู่' : 'Please enter address',
+        'data13': lang === 'th' ? 'ชื่อผู้รับ' : 'Recipient Name',
+        'data14': lang === 'th' ? 'เบอร์โทร' : 'Phone No.',
+        'data15': lang === 'th' ? 'ที่อยู่จัดส่ง' : 'Delivery Address'
+      };
+      Object.keys(placeholders).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.placeholder = placeholders[id];
+      });
+
+      // 4. เปลี่ยนหัวข้อทีม (Team 1, Team 2...)
+      document.querySelectorAll('.team-header-banner strong').forEach((el, index) => {
+        el.innerText = (lang === 'th' ? 'ทีมที่ ' : 'Team ') + (index + 1);
+      });
 
       calculateTotalPrice();
     }
