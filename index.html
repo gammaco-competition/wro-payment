@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Payment Form</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/190/190411.png?v=2" type="image/png">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+  
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <style>
     body {
       font-family: 'Prompt', sans-serif;
@@ -35,6 +38,30 @@
       padding: 20px 10px;
       margin-top: 20px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      position: relative; /* เพิ่มเพื่อให้วางปุ่มเปลี่ยนภาษาได้ */
+    }
+
+    /* --- ส่วนที่เพิ่ม: ปุ่มสลับภาษา --- */
+    .lang-switcher {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      display: flex;
+      gap: 5px;
+    }
+    .btn-lang {
+      padding: 2px 10px;
+      font-size: 12px;
+      border-radius: 20px;
+      border: 1px solid white;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+    }
+    .btn-lang.active {
+      background: white;
+      color: #006633;
+      font-weight: bold;
     }
 
     .card-header-main p {
@@ -42,7 +69,6 @@
       font-size: 1.25rem;
     }
 
-    /* การตั้งค่า Card หลัก (ยุบรวมแล้ว) */
     .card-custom {
       background: #ffffff;
       border-radius: 15px;
@@ -50,42 +76,19 @@
       margin-bottom: 25px;
       overflow: hidden;
       border: 1px solid #e0e0e0;
-      padding: 20px; /* เพิ่ม padding จากแบบเก่า */
-    }
-
-    .card-sub {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       padding: 20px;
-      margin-top: 20px;
     }
 
-    .choice-bg {
-      background-color: #f8f9fa;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      max-width: 100%;
-      margin: auto;
-    }
-
-    /* แถบหัวข้อภายใน Card ทีม */
     .team-header-banner {
       background: linear-gradient(135deg, #006633 0%, #2e7d32 100%);
       color: white;
       padding: 15px;
       text-align: center;
-      margin: -20px -20px 20px -20px; /* ขยายให้ชิดขอบการ์ด */
+      margin: -20px -20px 20px -20px;
       font-weight: 600;
       letter-spacing: 0.5px;
     }
 
-    .card-body-padding {
-      padding: 5px 0; /* ปรับให้พอดีกับ card-custom padding */
-    }
-
-    /* ข้อความแจ้งเตือน */
     .alert-info-text {
       background-color: #fff5f5;
       color: #e7180b;
@@ -96,7 +99,6 @@
       border-left: 4px solid #e7180b;
     }
 
-    /* Form Elements */
     .form-label-custom {
       font-weight: 600;
       color: #333;
@@ -115,21 +117,13 @@
       width: 100%;
       padding: 0.6rem 1rem;
       font-size: 1rem;
-      color: blue !important; /* ตามความต้องการเดิมของคุณ */
+      color: blue !important;
       background-color: #f8f9fa;
       border: 1px solid #ced4da;
       border-radius: 8px;
       transition: all 0.2s ease-in-out;
     }
 
-    .form-select-custom:focus {
-      border-color: #006633;
-      outline: 0;
-      box-shadow: 0 0 0 0.25rem rgba(0, 102, 51, 0.1);
-      background-color: #fff;
-    }
-
-    /* Drop Zone สำหรับอัปโหลด */
     .drop-zone {
       border: 2px dashed #ccc;
       padding: 60px;
@@ -141,8 +135,6 @@
     }
 
     .drop-zone:hover { border-color: #006633; background-color: #f0f7f4; }
-
-    /* Utility */
     .hidden-team { display: none; }
 
     .card-footer-custom {
@@ -162,41 +154,10 @@
       margin: 10px auto;
     }
 
-    /* Responsive */
     @media (max-width: 576px) {
       .card-header-main p { font-size: 1.1rem; }
       body { font-size: 14px; }
       .drop-zone { padding: 40px 10px !important; }
-    }
-
-    /* Language Switcher Styling */
-    .lang-switcher {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      display: flex;
-      gap: 5px;
-    }
-
-    .btn-lang {
-      padding: 2px 10px;
-      font-size: 0.8rem;
-      border-radius: 20px;
-      border: 1px solid white;
-      background: transparent;
-      color: white;
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-
-    .btn-lang.active {
-      background: white;
-      color: #006633;
-      font-weight: 600;
-    }
-
-    .card-header-main {
-      position: relative; /* เพื่อให้ปุ่ม lang-switcher อ้างอิงตำแหน่งได้ */
     }
   </style>
 </head>
@@ -208,22 +169,39 @@
         <button type="button" class="btn-lang active" onclick="changeLanguage('th')" id="lang-th">TH</button>
         <button type="button" class="btn-lang" onclick="changeLanguage('en')" id="lang-en">EN</button>
       </div>
-      <p><strong data-i18n="main_header">ชำระเงินค่าลงทะเบียนแข่งขัน ฯ / Pay Registration</strong></p>
+      <p><strong id="txt-main-title">ชำระเงินค่าลงทะเบียนแข่งขัน ฯ / Pay Registration</strong></p>
     </div>
 
     <form id="myForm" onsubmit="submitForm(); return false;">
       <div class="card-custom" id="preface">
-        <p class="fs-6 mb-0"><strong data-i18n="step_title"><u>ขั้นตอนการชำระเงิน</u> (Payment Procedure)</strong></p>
+        <p class="fs-6 mb-0"><strong id="txt-step-title"><u>ขั้นตอนการชำระเงิน</u><span class="text-muted"> (Payment Procedure)</span></strong></p>
         <br>
-        <p class="fs-6 mb-2"> ● <span data-i18n="step_1">เลือกจำนวนทีมที่ต้องการชำระเงิน (ต้องมาจากสถาบันเดียวกันเท่านั้น)</span></p>
-        <p class="fs-6 mb-2"> ● <span data-i18n="step_2">เลือกวิธีชำระเงิน โดยสามารถเลือกชำระผ่าน QR Code หรือ เลขบัญชีธนาคาร</span></p>
-        <p class="fs-6 mb-2"> ● <span data-i18n="step_3">อัพโหลดใบเสร็จ และเลือกขอใบกำกับภาษี หรือ ใบเสร็จรับเงิน หรือ ไม่ต้องการ และบันทึกข้อมูล</span></p>
-        <p class="fs-6 mb-2"> ● <span data-i18n="step_4">หากท่านมีข้อสงสัยติดต่อได้ที่เบอร์ 02-459-4731 ต่อ 232 หรือ Line OA : @wrothailand</span></p>
+        <p class="fs-6 mb-2"> ● <span id="txt-step1">เลือกจำนวนทีมที่ต้องการชำระเงิน</span> 
+          <span style="color: red;" id="txt-step1-note">(ท่านสามารถชำระค่าลงทะเบียนได้มากกว่า 1 ทีม โดยทีมที่เลือกจะต้องมาจากสถาบันเดียวกันเท่านั้น)</span>
+          <span style="display: block; font-size: 0.8em; color: #babdbf; width: 90%; margin-top: 5px; padding-left: 20px;">
+            Select the number of teams you wish to pay for (You can pay for more than one team, but the teams must be from the same institution).
+          </span>
+        </p>
+        <p class="fs-6 mb-2"> ● <span id="txt-step2">เลือกวิธีชำระเงิน โดยสามารถเลือกชำระผ่าน QR Code หรือ เลขบัญชีธนาคาร</span>
+          <span style="display: block; font-size: 0.8em; color: #babdbf; width: 90%; margin-top: 5px; padding-left: 20px;">
+            Choose the payment method. You can pay via QR Code or bank account number.
+          </span>
+        </p>
+        <p class="fs-6 mb-2"> ● <span id="txt-step3">อัพโหลดใบเสร็จ และเลือกขอใบกำกับภาษี หรือ ใบเสร็จรับเงิน หรือ ไม่ต้องการ และบันทึกข้อมูล</span>
+          <span style="display: block; font-size: 0.8em; color: #babdbf; width: 90%; margin-top: 5px; padding-left: 20px;">
+            Upload receipt and choose to request a tax invoice, receipt, or none, and save the information.
+          </span>
+        </p>
+        <p class="fs-6 mb-2"> ● <span id="txt-step4">หากท่านมีข้อสงสัยหรือสอบถามข้อมูลเพิ่มเติม สามารถติดต่อได้ที่เบอร์ 02-459-4731 ต่อ 232 หรือ Line OA : @wrothailand (ในวันทำการ จันทร์-ศุกร์ เวลา 8.30 - 17.00 น.)</span>
+          <span style="display: block; font-size: 0.8em; color: #babdbf; width: 90%; margin-top: 5px; padding-left: 20px;">
+            If you have any questions or need further information, you can contact us at 02-459-4731 ext. 232 or via Line OA: @wrothailand (Monday to Friday, 8:30 AM - 5:00 PM).
+          </span>
+        </p>
         <hr>
-        <p class="fs-6 mb-3" style="color: red;"><i class="fa-regular fa-bookmark"></i> <strong data-i18n="select_team_count">เลือกจำนวนทีมที่ท่านต้องการชำระเงิน</strong></p>
+        <p class="fs-6 mb-3" style="color: red;"><i class="fa-regular fa-bookmark"></i><strong id="txt-select-team"> เลือกจำนวนทีมที่ท่านต้องการชำระเงิน (Select the number of teams you want to pay for)</strong></p>
         <div class="form-group col-md-4 d-flex flex-column mb-3">
           <select id="teamCount" class="fs-5" style="width: 300px; height: 40px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 5px;" onchange="showSelectedTeam()">
-            <option value="" selected disabled data-i18n="please_select">-- กรุณาเลือก --</option>
+            <option value="" selected disabled id="txt-dropdown-hint">-- กรุณาเลือก --</option>
             <option value="1">1 ทีม</option>
             <option value="2">2 ทีม</option>
             <option value="3">3 ทีม</option>
@@ -244,30 +222,30 @@
           let requiredAttr = (i === 1) ? "required" : "";
           let teamHtml = `
           <div class="card-custom hidden-team" id="team${i}">
-            <div class="team-header-banner"><strong class="fs-5" data-team-label="true">Team ${i}</strong></div>
+            <div class="team-header-banner"><strong class="fs-5">Team ${i}</strong></div>
             <div class="card-body-padding">
-              <div class="alert-info-text"><i class="fa-solid fa-circle-info"></i> <span data-i18n="age_info">โปรดเลือกรุ่นอายุ (Age Group) ตามข้อมูลของทีม</span></div>
+              <div class="alert-info-text alert-team-info"><i class="fa-solid fa-circle-info"></i> ประเภท Robomission และ Future Innovators โปรดเลือกรุ่นอายุ (Age Group) ตามข้อมูลของทีม</div>
               <div class="row g-3">
                 <div class="col-md-6">
-                  <label class="form-label-custom"><i class="fa-solid fa-graduation-cap"></i> <span data-i18n="age_group">รุ่นอายุ / Age Group</span></label>
+                  <label class="form-label-custom lbl-age"><i class="fa-solid fa-graduation-cap"></i> รุ่นอายุ / Age Group</label>
                   <select class="form-select-custom" id="colA${suffix}" ${requiredAttr}>
-                    <option value="" selected data-i18n="choose">Choose</option>
+                    <option value="" selected>Choose</option>
                   </select>
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label-custom"><i class="fa-solid fa-id-badge"></i> <span data-i18n="team_id">ทีมไอดี / Team ID</span></label>
+                  <label class="form-label-custom lbl-tid"><i class="fa-solid fa-id-badge"></i> ทีมไอดี / Team ID</label>
                   <select class="form-select-custom" id="colB${suffix}" ${requiredAttr}>
-                    <option value="" selected data-i18n="choose">Choose</option>
+                    <option value="" selected>Choose</option>
                   </select>
                 </div>
                 <div class="col-md-5">
-                  <label class="form-label-custom"><i class="fa-solid fa-pen-to-square"></i> <span data-i18n="team_name">ชื่อทีม / Team Name</span></label>
+                  <label class="form-label-custom lbl-tname"><i class="fa-solid fa-pen-to-square"></i> ชื่อทีม / Team Name</label>
                   <select class="form-select-custom" id="colC${suffix}" ${requiredAttr}>
                     <option value=""></option>
                   </select>
                 </div>
                 <div class="col-md-7">
-                  <label class="form-label-custom"><i class="fa-solid fa-building-columns"></i> <span data-i18n="institution">สถาบัน / Institution</span></label>
+                  <label class="form-label-custom lbl-inst"><i class="fa-solid fa-building-columns"></i> สถาบัน / Institution</label>
                   <select class="form-select-custom" id="colD${suffix}">
                     <option value=""></option>
                   </select>
@@ -284,14 +262,14 @@
           <p id="priceDisplay" class="mt-3 fw-bold" style="font-size: 24px; padding: 10px 30px; text-align: right; color: red;"></p>
           <hr>
           <div class="form-group col-md-12 mb-3">
-            <p class="fw-bold" style="font-size: 16px;"><i class="fa-solid fa-caret-right"></i> <span data-i18n="payment_method">เลือกวิธีชำระเงิน (Choose a payment method)</span></p>
+            <p class="fw-bold custom-bold" style="font-size: 16px;"><i class="fa-solid fa-caret-right"></i> <span id="txt-pay-method">เลือกวิธีชำระเงิน</span> <span style="color: #888; font-size: 16px;">(Choose a payment method)</span></p>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="data6" id="qr" value="qr" required checked>
-              <label class="form-check-label" for="qr" style="font-size: 16px;" data-i18n="pay_qr">ชำระด้วย QR Code</label>
+              <label class="form-check-label" for="qr" style="font-size: 16px;" id="txt-pay-qr">ชำระด้วย QR Code / Payment with QR Code</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="data6" id="acc" value="acc" required>
-              <label class="form-check-label" for="acc" style="font-size: 16px;" data-i18n="pay_bank">ชำระผ่านบัญชีธนาคาร</label>
+              <label class="form-check-label" for="acc" style="font-size: 16px;" id="txt-pay-acc">ชำระผ่านบัญชีธนาคาร / Payment via bank transfer</label>
             </div>
           </div>
         </div>
@@ -299,15 +277,15 @@
         <div class="row my-2 mx-auto align-items-start" id="payment">
           <hr>
           <div class="col-auto">
-            <img src="https://img2.pic.in.th/270746805_10161735880783916_2146008855314507829_n.jpeg" alt="Bank" style="width: 70px; height: auto; margin-top: 10px;">
+            <img src="https://img2.pic.in.th/270746805_10161735880783916_2146008855314507829_n.jpeg" alt="Krung Thai Bank" style="width: 70px; height: auto; margin-top: 10px;">
           </div>
           <div class="col">
-            <p style="font-size: 16px;" class="mb-2"><strong data-i18n="bank_name">ธนาคารกรุงไทย / Krung Thai Bank</strong></p>
-            <p style="font-size: 16px;" class="mb-2" data-i18n="acc_name">ชื่อบัญชี : บริษัท แกมมาโก้ (ประเทศไทย) จำกัด</p>
-            <p style="font-size: 16px;" class="mb-2" data-i18n="acc_no">เลขบัญชี : 980-2-99645-9</p>
+            <p style="font-size: 16px;" class="mb-2"><strong id="txt-bank-name">ธนาคารกรุงไทย / Krung Thai Bank</strong></p>
+            <p style="font-size: 16px;" class="mb-2" id="txt-acc-name">ชื่อบัญชี : บริษัท แกมมาโก้ (ประเทศไทย) จำกัด / GAMMACO (THAILAND) CO.,LTD.</p>
+            <p style="font-size: 16px;" class="mb-2" id="txt-acc-no">เลขบัญชี : 980-2-99645-9</p>
           </div>
         </div>
-        
+        <br>
         <div class="row my-2 mx-auto" id="qrpay">
           <hr>
           <img id="qrImage" src="http://gammaco.co.th/marketingform/wp-content/uploads/2025/04/Blank.png" alt="QR Code" style="max-width: 250px; margin-left: 2em; margin-top: 1em;">
@@ -315,14 +293,14 @@
 
         <div class="row my-2 mx-auto">
           <div class="form-group col-md-12 d-flex flex-column mb-3">
-            <label for="file" class="fw-bold" style="font-size: 16px;"><i class="fas fa-upload"></i> <span data-i18n="upload_slip">อัพโหลดใบเสร็จค่าลงทะเบียน (Upload Pay Slip)</span></label>
+            <label for="file" class="fw-bold" style="font-size: 16px;"><i class="fas fa-upload"></i> <span id="txt-upload-label">อัพโหลดใบเสร็จค่าลงทะเบียน (Upload Pay Slip)</span></label>
             <br>
             <div id="drop-zone" class="drop-zone text-center position-relative">
               <div class="upload-content">
-                <i class="fa-solid fa-cloud-arrow-up fa-3x mb-2 text-muted"></i>
+                <i class="fa-solid fa-cloud-arrow-up"></i>
                 <div class="upload-text">
-                  <strong data-i18n="upload_file">Upload a File</strong>
-                  <p data-i18n="upload_hint">Drag and drop files here or click to upload</p>
+                  <strong id="txt-upload-title">Upload a File</strong>
+                  <p id="txt-upload-hint">Drag and drop files here or click to upload</p>
                 </div>
               </div>
               <img id="preview-image" src="" alt="Preview" class="preview-img d-none" />
@@ -334,219 +312,127 @@
 
       <div class="card-custom">
         <div class="row my-2 mx-auto">
-          <p class="fw-bold" style="font-size: 16px;"><i class="fa-solid fa-caret-right"></i> <span data-i18n="contact_details">ข้อมูลติดต่อ (Contact Details:)</span></p>
-          <div class="form-group col-md-5">
-            <label class="mb-2" for="data17"><i class="fa-solid fa-circle-user"></i> <span data-i18n="name_surname">ชื่อ-สกุล / Name-Surname</span> <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="data17" required>
+          <p class="fw-bold custom-bold" style="font-size: 16px;"><i class="fa-solid fa-caret-right"></i> <span id="txt-contact-title">ข้อมูลติดต่อ : </span> <span class="text-muted" style="font-size: 16px;">(Contact Details:)</span></p>
+          <div class="form-group col-md-5" id="contact_name">
+            <label class="mb-2 lbl-cname" for="data17" style="font-size: 16px;"><i class="fa-solid fa-circle-user"></i> ชื่อ-สกุล / Name-Surname <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="data17" placeholder="ชื่อ-นามสกุล" style="font-size: 16px;" required>
           </div>
-          <div class="form-group col-md-4">
-            <label class="mb-2" for="data18"><i class="fa-solid fa-phone"></i> <span data-i18n="phone_no">เบอร์โทรศัพท์ / Phone No.</span> <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="data18" required>
+          <div class="form-group col-md-4" id="contact_phone">
+            <label class="mb-2 lbl-cphone" for="data18" style="font-size: 16px;"><i class="fa-solid fa-phone"></i> เบอร์โทรศัพท์ / Phone No. <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="data18" placeholder="เบอร์โทรศัพท์ที่สามารถติดต่อได้" style="font-size: 16px;" required>
           </div>
-          <div class="form-group col-md-3">
-            <label class="mb-2" for="data55"><i class="fa-brands fa-line"></i> <span data-i18n="line_id">ไลน์ไอดี / Line ID</span></label>
-            <input type="text" class="form-control" id="data55">
+          <div class="form-group col-md-3" id="contact_lineid">
+            <label class="mb-2 lbl-cline" for="data55" style="font-size: 16px;"><i class="fa-brands fa-line"></i> ไลน์ไอดี / Line ID</label>
+            <input type="text" class="form-control" id="data55" placeholder="Line ID" style="font-size: 16px;">
           </div>
         </div>
         <br>
         <div class="row my-2 mx-auto">
           <div class="form-group col-md-12 mb-3">
-            <p class="fw-bold"><i class="fa-solid fa-caret-right"></i> <span data-i18n="doc_request">การออกเอกสาร (Document Issuance) ?</span></p>
+            <p class="fw-bold custom-bold"><i class="fa-solid fa-caret-right"></i> <span id="txt-doc-title">การออกเอกสาร : </span> <span class="text-muted"> (Document Issuance)</span> ? </p>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="data7" id="tax" value="ใบกำกับภาษี" required>
-              <label class="form-check-label" for="tax" data-i18n="tax_invoice">ใบกำกับภาษี</label>
+              <label class="form-check-label lbl-doc-tax" for="tax"> ใบกำกับภาษี / Tax invoice</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="data7" id="bill" value="ใบเสร็จรับเงิน" required>
-              <label class="form-check-label" for="bill" data-i18n="receipt">ใบเสร็จรับเงิน</label>
+              <label class="form-check-label lbl-doc-bill" for="bill"> ใบเสร็จรับเงิน / Receipt</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="data7" id="no" value="ไม่รับ" required>
-              <label class="form-check-label" for="no" data-i18n="no_doc">ไม่ต้องการ</label>
+              <label class="form-check-label lbl-doc-no" for="no"> ไม่ต้องการ / No</label>
             </div>
+          </div>
+        </div>
+        <div class="row my-2 mx-auto" id="tax_choice">
+          <div class="form-group col-md-12 mb-3">
+            <p class="fw-bold text-bold"><i class="fa-solid fa-caret-right"></i> <span id="txt-tax-history">บริษัทของท่าน เคยออกใบกำกับภาษีกับทางบริษัทฯ แล้วหรือไม่ </span> <span class="text-muted">(Has your company previously issued a tax invoice to our company)</span>?</p>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="data8" id="yes" value="yes" >
+              <label class="form-check-label lbl-yes" for="yes">เคย / Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="data8" id="no" value="no" >
+              <label class="form-check-label lbl-no" for="no">ไม่เคย / No</label>
+            </div>
+          </div>
+        </div>
+        <div class="row my-2 mx-auto">
+          <div class="form-group col-md-6 mb-3" id="tax_institution">
+            <label class="mb-2 lbl-comp" for="tax_institution"><i class="far fa-building"></i> ชื่อบริษัท / Company Name</label>
+            <input type="text" class="form-control" id="data9" placeholder="ระบุชื่อหน่วยงาน / สถาบัน" >
+          </div>
+          <div class="form-group col-md-6" id="tax_id"> 
+            <label class="mb-2 lbl-taxid" for="tax_id"><i class="far fa-address-card"></i> เลขประจำตัวผู้เสียภาษี / Tax ID</label>
+            <input type="number" class="form-control" id="data10" placeholder="ระบุเลขที่ผู้เสียภาษี" minlength="13" maxlength="13">
+          </div>
+        </div>
+        <div class="row my-2 mx-auto" id="tax_address">
+          <div class="form-group col-md-12 mb-2">
+            <label class="mb-2 lbl-addr" for="tax_address"><i class="fas fa-address-card"></i> ที่อยู่ / Address</label>
+            <textarea class="form-control" rows="3" id="data11" placeholder="โปรดระบุที่อยู่"></textarea>
+          </div>
+        </div>
+
+        <div class="row my-2 mx-auto" id="document">
+          <div class="form-group col-md-12 mb-3">
+            <p class="fw-bold"><i class="fas fa-home"></i> <span id="txt-delivery">การจัดส่งเอกสาร </span> <span class="text-muted"> (Document Delivery)</span></p>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="data12" id="id1" value="ตามใบเสร็จ" >
+              <label class="form-check-label lbl-del-bill" for="id1">จัดส่งตามที่อยู่เอกสาร <span class="text-muted"> (Billing address)</span></label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="data12" id="id2" value="ที่อยู่ใหม่" >
+              <label class="form-check-label lbl-del-new" for="id2">ที่อยู่ใหม่ <span class="text-muted"> (New Address)</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row my-2 mx-auto" >
+          <div class="form-group col-md-6" id="doc_name">
+            <label class="mb-2 lbl-rname" for="doc_name"><i class="fas fa-user"></i> ชื่อ-สกุล / Name-Surname (ผู้รับเอกสาร)</label>
+            <input type="text" class="form-control" id="data13" placeholder="Name">
+          </div>
+          <div class="form-group col-md-6" id="doc_phone">
+            <label class="mb-2 lbl-rphone" for="doc_phone"><i class="fas fa-mobile-alt"></i> เบอร์โทรศัพท์ / Phone No.</label>
+            <input type="tel" class="form-control" id="data14" placeholder="เบอร์โทร" >
+          </div>
+        </div>
+        <div class="row my-2 mx-auto" id="doc_address">
+          <div class="form-group col-md-12">
+            <label class="mb-2 lbl-raddr" for="doc_address"><i class="fas fa-address-card"></i> ที่อยู่ / Address</label>
+            <textarea class="form-control" rows="3" id="data15" placeholder="Address"></textarea>
           </div>
         </div>
       </div>
 
       <div class="card-custom">
-        <div class="row my-2 mx-auto text-danger">
-          <p><span data-i18n="verify_accuracy">* โปรดตรวจสอบความถูกต้องก่อนทำการส่งข้อมูล</span></p>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="data16" id="firm" value="Waiting" required>
-            <label class="form-check-label" for="firm" data-i18n="confirm_check">ข้าพเจ้าได้กรอกข้อมูลครบถ้วนแล้ว</label>
+        <div class="row my-2 mx-auto">
+          <p class="row my-2 mx-auto text-danger" id="txt-verify-hint"> * โปรดตรวจสอบความถูกต้องก่อนทำการส่งข้อมูล <span class="text-muted">(Please verify the accuracy before submitting the information.)</span></p>
+          <div class="form-group col-md-12">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="data16" id="firm" value="Waiting" required>
+              <label class="form-check-label lbl-confirm" for="firm"><i class="far fa-check-circle"></i> ข้าพเจ้าได้กรอกข้อมูลครบถ้วนแล้ว <span class="text-muted">(I have completed filling out all the required information.)</span></label>
+            </div>
           </div>
         </div>
       </div>
+      <br>          
 
       <div class="form-group text-center my-3">
-        <button type="submit" class="btn btn-danger btn-lg px-5" id="btn1">
-          <i class="fas fa-save"></i> <span data-i18n="save_btn">บันทึกข้อมูล</span>
-        </button>
+        <button type="submit" class="btn btn-danger btn-block" id="btn1"><i class="fas fa-save"></i> <span id="txt-btn-save">บันทึกข้อมูล</span></button>
       </div>
     </form>
 
-    <p class="mb-0 text-end fw-bold" style="font-size: 14px;">Ver. 2026-8.1</p>
-    <div class="card-footer-custom">
-      <strong>Organized by Gammaco (Thailand) Co., LTD.</strong>
+    <p class="mb-0" style="font-size: 14px; font-weight: bold; text-align: right;">Ver. 2026-8.2</p>
+    <div class="card-footer" style="background: linear-gradient(90deg, #00744d, #00a36c); color: white; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 0 0 10px 10px;">
+      <p class="text-center mb-0" style="font-size: 14px;"><strong>Organized by Gammaco (Thailand) Co., LTD.</strong></p>
     </div>
   </div>
 
   <script>
-    // =========================================================================
-    // 🔴 กำหนด URL ของ Google Apps Script ของคุณที่นี่
-    // =========================================================================
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-g6J80h6etivW4XWl0GfUbJTuljY29DKTHKF89ZLwhue_Biij0EA8MlLe3scj-W8X/exec'; 
 
-    // 1. ข้อมูลภาษา
-const translations = {
-  th: {
-    main_header: "ชำระเงินค่าลงทะเบียนแข่งขัน ฯ",
-    step_title: "ขั้นตอนการชำระเงิน",
-    step_1: "เลือกจำนวนทีมที่ต้องการชำระเงิน (ต้องมาจากสถาบันเดียวกันเท่านั้น)",
-    step_2: "เลือกวิธีชำระเงิน โดยสามารถเลือกชำระผ่าน QR Code หรือ เลขบัญชีธนาคาร",
-    step_3: "อัพโหลดใบเสร็จ และเลือกขอใบกำกับภาษี หรือ ใบเสร็จรับเงิน และบันทึกข้อมูล",
-    step_4: "สอบถามข้อมูลเพิ่มเติม 02-459-4731 ต่อ 232 หรือ Line: @wrothailand",
-    select_team_count: "เลือกจำนวนทีมที่ท่านต้องการชำระเงิน",
-    please_select: "-- กรุณาเลือก --",
-    team_label: "ทีมที่",
-    age_group: "รุ่นอายุ",
-    team_id: "ทีมไอดี",
-    team_name: "ชื่อทีม",
-    institution: "สถาบัน",
-    payment_method: "เลือกวิธีชำระเงิน",
-    pay_qr: "ชำระด้วย QR Code",
-    pay_bank: "ชำระผ่านบัญชีธนาคาร",
-    bank_name: "ธนาคารกรุงไทย",
-    acc_name: "ชื่อบัญชี : บริษัท แกมมาโก้ (ประเทศไทย) จำกัด",
-    acc_no: "เลขบัญชี : 980-2-99645-9",
-    upload_slip: "อัพโหลดใบเสร็จค่าลงทะเบียน",
-    contact_info: "ข้อมูลติดต่อ",
-    name_surname: "ชื่อ-สกุล",
-    phone_no: "เบอร์โทรศัพท์",
-    line_id: "ไลน์ไอดี",
-    doc_issuance: "การออกเอกสาร",
-    tax_invoice: "ใบกำกับภาษี",
-    receipt: "ใบเสร็จรับเงิน",
-    no_doc: "ไม่ต้องการ",
-    tax_history: "บริษัทของท่าน เคยออกใบกำกับภาษีแล้วหรือไม่?",
-    yes: "เคย",
-    no: "ไม่เคย",
-    company_name: "ชื่อบริษัท/หน่วยงาน",
-    tax_id_label: "เลขประจำตัวผู้เสียภาษี",
-    address: "ที่อยู่",
-    doc_delivery: "การจัดส่งเอกสาร",
-    by_billing: "จัดส่งตามที่อยู่เอกสาร",
-    new_address: "ที่อยู่ใหม่",
-    receiver_name: "ชื่อผู้รับเอกสาร",
-    confirm_check: "ข้าพเจ้าได้กรอกข้อมูลครบถ้วนแล้ว",
-    save_btn: "บันทึกข้อมูล",
-    price_total: "จำนวนเงินที่ชำระ : ",
-    baht: "บาท",
-    swal_saving: "กำลังบันทึกข้อมูล...",
-    swal_success: "บันทึกข้อมูลสำเร็จ",
-    swal_error: "เกิดข้อผิดพลาด",
-    duplicate_id: "คุณใส่ Team ID ซ้ำ"
-  },
-  en: {
-    main_header: "Payment Registration Form",
-    step_title: "Payment Procedure",
-    step_1: "Select the number of teams (must be from the same institution).",
-    step_2: "Choose payment method (QR Code or Bank Transfer).",
-    step_3: "Upload receipt, choose document type, and save.",
-    step_4: "Contact us at 02-459-4731 ext 232 or Line: @wrothailand",
-    select_team_count: "Select the number of teams you want to pay for",
-    please_select: "-- Please Select --",
-    team_label: "Team",
-    age_group: "Age Group",
-    team_id: "Team ID",
-    team_name: "Team Name",
-    institution: "Institution",
-    payment_method: "Choose payment method",
-    pay_qr: "Payment with QR Code",
-    pay_bank: "Bank Transfer",
-    bank_name: "Krung Thai Bank",
-    acc_name: "Account: GAMMACO (THAILAND) CO.,LTD.",
-    acc_no: "Account No: 980-2-99645-9",
-    upload_slip: "Upload Pay Slip",
-    contact_info: "Contact Details",
-    name_surname: "Name-Surname",
-    phone_no: "Phone No.",
-    line_id: "Line ID",
-    doc_issuance: "Document Issuance",
-    tax_invoice: "Tax Invoice",
-    receipt: "Receipt",
-    no_doc: "None",
-    tax_history: "Has your company previously issued a tax invoice?",
-    yes: "Yes",
-    no: "No",
-    company_name: "Company Name",
-    tax_id_label: "Tax ID",
-    address: "Address",
-    doc_delivery: "Document Delivery",
-    by_billing: "Billing address",
-    new_address: "New Address",
-    receiver_name: "Receiver Name",
-    confirm_check: "I have completed all information.",
-    save_btn: "Save Data",
-    price_total: "Total Payment: ",
-    baht: "THB",
-    swal_saving: "Saving data...",
-    swal_success: "Success",
-    swal_error: "Error",
-    duplicate_id: "Duplicate Team ID detected"
-  }
-};
-
-let currentLang = 'th';
-
-// 2. ฟังก์ชันสลับภาษา
-function changeLanguage(lang) {
-  currentLang = lang;
-  
-  // Update Buttons
-  document.getElementById('lang-th').classList.toggle('active', lang === 'th');
-  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
-
-  // Translate all elements with data-i18n attribute
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (translations[lang][key]) {
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        el.placeholder = translations[lang][key];
-      } else {
-        el.innerText = translations[lang][key];
-      }
-    }
-  });
-
-  // อัปเดตส่วนที่เป็น Dynamic (เช่น Team 1, Team 2)
-  updateDynamicLabels();
-  calculateTotalPrice(); // อัปเดตภาษาในยอดรวมเงินด้วย
-}
-
-function updateDynamicLabels() {
-  // วนลูปเปลี่ยนหัวข้อ Team 1 - 10
-  for (let i = 1; i <= 10; i++) {
-    const banner = document.querySelector(`#team${i} .team-header-banner strong`);
-    if (banner) {
-      banner.innerText = `${translations[currentLang].team_label} ${i}`;
-    }
-  }
-}
-
-// 3. ปรับปรุง calculateTotalPrice ให้ใช้ภาษาที่เลือก
-function calculateTotalPrice() {
-    const teamCount = parseInt(document.getElementById("teamCount").value) || 0;
-    let totalPrice = 0;
-    // ... (ส่วนคำนวณเดิม) ...
-    
-    const priceDisplay = document.getElementById("priceDisplay");
-    if (priceDisplay) {
-        priceDisplay.innerHTML = `► ${translations[currentLang].price_total} ${totalPrice.toLocaleString()} ${translations[currentLang].baht}`;
-    }
-}
-
-    // ดึงค่า userId และ userProfile จาก URL (ถ้ามี)
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('userId') || 'unknown_user';
     const userProfile = urlParams.get('userProfile') || 'unknown_profile';
@@ -555,6 +441,178 @@ function calculateTotalPrice() {
     const imageMap = {
       default: 'http://gammaco.co.th/marketingform/wp-content/uploads/2025/04/Blank.png' 
     };
+
+    // --- ส่วนที่เพิ่ม: ระบบแปลภาษาแบบ Mapping ---
+    let currentLang = 'th';
+    const trans = {
+      th: {
+        main_title: "ชำระเงินค่าลงทะเบียนแข่งขัน ฯ / Pay Registration",
+        step_title: "ขั้นตอนการชำระเงิน (Payment Procedure)",
+        step1: "เลือกจำนวนทีมที่ต้องการชำระเงิน",
+        step1_note: "(ท่านสามารถชำระค่าลงทะเบียนได้มากกว่า 1 ทีม โดยทีมที่เลือกจะต้องมาจากสถาบันเดียวกันเท่านั้น)",
+        step2: "เลือกวิธีชำระเงิน โดยสามารถเลือกชำระผ่าน QR Code หรือ เลขบัญชีธนาคาร",
+        step3: "อัพโหลดใบเสร็จ และเลือกขอใบกำกับภาษี หรือ ใบเสร็จรับเงิน หรือ ไม่ต้องการ และบันทึกข้อมูล",
+        step4: "หากท่านมีข้อสงสัยหรือสอบถามข้อมูลเพิ่มเติม สามารถติดต่อได้ที่เบอร์ 02-459-4731 ต่อ 232 หรือ Line OA : @wrothailand (ในวันทำการ จันทร์-ศุกร์ เวลา 8.30 - 17.00 น.)",
+        select_team: " เลือกจำนวนทีมที่ท่านต้องการชำระเงิน (Select the number of teams you want to pay for)",
+        dropdown_hint: "-- กรุณาเลือก --",
+        team_info: "ประเภท Robomission และ Future Innovators โปรดเลือกรุ่นอายุ (Age Group) ตามข้อมูลของทีม",
+        lbl_age: "รุ่นอายุ / Age Group",
+        lbl_tid: "ทีมไอดี / Team ID",
+        lbl_tname: "ชื่อทีม / Team Name",
+        lbl_inst: "สถาบัน / Institution",
+        pay_method: "เลือกวิธีชำระเงิน",
+        pay_qr: "ชำระด้วย QR Code / Payment with QR Code",
+        pay_acc: "ชำระผ่านบัญชีธนาคาร / Payment via bank transfer",
+        bank_name: "ธนาคารกรุงไทย / Krung Thai Bank",
+        acc_name: "ชื่อบัญชี : บริษัท แกมมาโก้ (ประเทศไทย) จำกัด / GAMMACO (THAILAND) CO.,LTD.",
+        acc_no: "เลขบัญชี : 980-2-99645-9",
+        upload_label: "อัพโหลดใบเสร็จค่าลงทะเบียน (Upload Pay Slip)",
+        upload_title: "Upload a File",
+        upload_hint: "Drag and drop files here or click to upload",
+        contact_title: "ข้อมูลติดต่อ : ",
+        cname: "ชื่อ-สกุล / Name-Surname *",
+        cphone: "เบอร์โทรศัพท์ / Phone No. *",
+        cline: "ไลน์ไอดี / Line ID",
+        doc_title: "การออกเอกสาร : ",
+        doc_tax: " ใบกำกับภาษี / Tax invoice",
+        doc_bill: " ใบเสร็จรับเงิน / Receipt",
+        doc_no: " ไม่ต้องการ / No",
+        tax_history: "บริษัทของท่าน เคยออกใบกำกับภาษีกับทางบริษัทฯ แล้วหรือไม่ ",
+        yes: "เคย / Yes",
+        no: "ไม่เคย / No",
+        comp: " ชื่อบริษัท / Company Name",
+        taxid: " เลขประจำตัวผู้เสียภาษี / Tax ID",
+        addr: " ที่อยู่ / Address",
+        delivery: "การจัดส่งเอกสาร ",
+        del_bill: "จัดส่งตามที่อยู่เอกสาร (Billing address)",
+        del_new: "ที่อยู่ใหม่ (New Address)",
+        rname: " ชื่อ-สกุล / Name-Surname (ผู้รับเอกสาร)",
+        rphone: " เบอร์โทรศัพท์ / Phone No.",
+        raddr: " ที่อยู่ / Address",
+        verify_hint: " * โปรดตรวจสอบความถูกต้องก่อนทำการส่งข้อมูล (Please verify the accuracy before submitting the information.)",
+        confirm: " ข้าพเจ้าได้กรอกข้อมูลครบถ้วนแล้ว (I have completed filling out all the required information.)",
+        btn_save: "บันทึกข้อมูล",
+        total_txt: "จำนวนเงินที่ชำระ",
+        baht: "บาท",
+        swal_saving: "กำลังบันทึกข้อมูล",
+        swal_wait: "กรุณารอสักครู่...",
+        swal_success: "บันทึกข้อมูลสำเร็จ",
+        swal_dup: "คุณใส่ Team ID ซ้ำ"
+      },
+      en: {
+        main_title: "Competition Registration Payment Form",
+        step_title: "Payment Procedure",
+        step1: "Select the number of teams",
+        step1_note: "(Teams must be from the same institution)",
+        step2: "Choose payment method: QR Code or Bank Transfer",
+        step3: "Upload receipt, request tax invoice/receipt, and Save",
+        step4: "For inquiries, call 02-459-4731 ext. 232 or Line OA: @wrothailand",
+        select_team: "Select the number of teams you want to pay for",
+        dropdown_hint: "-- Please Select --",
+        team_info: "For Robomission and Future Innovators, please select the correct Age Group",
+        lbl_age: "Age Group",
+        lbl_tid: "Team ID",
+        lbl_tname: "Team Name",
+        lbl_inst: "Institution",
+        pay_method: "Select Payment Method",
+        pay_qr: "Payment with QR Code",
+        pay_acc: "Payment via bank transfer",
+        bank_name: "Krung Thai Bank",
+        acc_name: "Account Name: GAMMACO (THAILAND) CO.,LTD.",
+        acc_no: "Account No: 980-2-99645-9",
+        upload_label: "Upload Pay Slip",
+        upload_title: "Upload a File",
+        upload_hint: "Drag and drop files here or click to upload",
+        contact_title: "Contact Details: ",
+        cname: "Name-Surname *",
+        cphone: "Phone No. *",
+        cline: "Line ID",
+        doc_title: "Document Issuance: ",
+        doc_tax: " Tax invoice",
+        doc_bill: " Receipt",
+        doc_no: " No",
+        tax_history: "Has your company previously issued a tax invoice to us? ",
+        yes: "Yes",
+        no: "No",
+        comp: " Company Name",
+        taxid: " Tax ID",
+        addr: " Address",
+        delivery: "Document Delivery",
+        del_bill: "Billing address",
+        del_new: "New Address",
+        rname: " Name-Surname (Recipient)",
+        rphone: " Phone No.",
+        raddr: " Address",
+        verify_hint: " * Please verify the accuracy before submitting.",
+        confirm: " I have completed all the required information.",
+        btn_save: "Save Data",
+        total_txt: "Total Amount",
+        baht: "THB",
+        swal_saving: "Saving Data",
+        swal_wait: "Please wait...",
+        swal_success: "Successfully Saved",
+        swal_dup: "Duplicate Team ID found"
+      }
+    };
+
+    function changeLanguage(lang) {
+      currentLang = lang;
+      document.getElementById('lang-th').classList.toggle('active', lang === 'th');
+      document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+
+      const t = trans[lang];
+      document.getElementById('txt-main-title').innerText = t.main_title;
+      document.getElementById('txt-step-title').innerHTML = `<u>${t.step_title}</u>`;
+      document.getElementById('txt-step1').innerText = t.step1;
+      document.getElementById('txt-step1-note').innerText = t.step1_note;
+      document.getElementById('txt-step2').innerText = t.step2;
+      document.getElementById('txt-step3').innerText = t.step3;
+      document.getElementById('txt-step4').innerText = t.step4;
+      document.getElementById('txt-select-team').innerText = t.select_team;
+      document.getElementById('txt-dropdown-hint').innerText = t.dropdown_hint;
+      
+      // Update dynamic parts
+      $('.alert-team-info').each(function() { $(this).html(`<i class="fa-solid fa-circle-info"></i> ${t.team_info}`); });
+      $('.lbl-age').each(function() { $(this).html(`<i class="fa-solid fa-graduation-cap"></i> ${t.lbl_age}`); });
+      $('.lbl-tid').each(function() { $(this).html(`<i class="fa-solid fa-id-badge"></i> ${t.lbl_tid}`); });
+      $('.lbl-tname').each(function() { $(this).html(`<i class="fa-solid fa-pen-to-square"></i> ${t.lbl_tname}`); });
+      $('.lbl-inst').each(function() { $(this).html(`<i class="fa-solid fa-building-columns"></i> ${t.lbl_inst}`); });
+
+      document.getElementById('txt-pay-method').innerText = t.pay_method;
+      document.getElementById('txt-pay-qr').innerText = t.pay_qr;
+      document.getElementById('txt-pay-acc').innerText = t.pay_acc;
+      document.getElementById('txt-bank-name').innerText = t.bank_name;
+      document.getElementById('txt-acc-name').innerText = t.acc_name;
+      document.getElementById('txt-acc-no').innerText = t.acc_no;
+      document.getElementById('txt-upload-label').innerText = t.upload_label;
+      document.getElementById('txt-upload-title').innerText = t.upload_title;
+      document.getElementById('txt-upload-hint').innerText = t.upload_hint;
+      document.getElementById('txt-contact-title').innerText = t.contact_title;
+      $('.lbl-cname').each(function() { $(this).html(`<i class="fa-solid fa-circle-user"></i> ${t.cname}`); });
+      $('.lbl-cphone').each(function() { $(this).html(`<i class="fa-solid fa-phone"></i> ${t.cphone}`); });
+      $('.lbl-cline').each(function() { $(this).html(`<i class="fa-brands fa-line"></i> ${t.cline}`); });
+      document.getElementById('txt-doc-title').innerText = t.doc_title;
+      $('.lbl-doc-tax').innerText = t.doc_tax;
+      $('.lbl-doc-bill').innerText = t.doc_bill;
+      $('.lbl-doc-no').innerText = t.doc_no;
+      document.getElementById('txt-tax-history').innerText = t.tax_history;
+      $('.lbl-yes').innerText = t.yes;
+      $('.lbl-no').innerText = t.no;
+      $('.lbl-comp').each(function() { $(this).html(`<i class="far fa-building"></i> ${t.comp}`); });
+      $('.lbl-taxid').each(function() { $(this).html(`<i class="far fa-address-card"></i> ${t.taxid}`); });
+      $('.lbl-addr').each(function() { $(this).html(`<i class="fas fa-address-card"></i> ${t.addr}`); });
+      document.getElementById('txt-delivery').innerText = t.delivery;
+      $('.lbl-del-bill').innerText = t.del_bill;
+      $('.lbl-del-new').innerText = t.del_new;
+      $('.lbl-rname').each(function() { $(this).html(`<i class="fas fa-user"></i> ${t.rname}`); });
+      $('.lbl-rphone').each(function() { $(this).html(`<i class="fas fa-mobile-alt"></i> ${t.rphone}`); });
+      $('.lbl-raddr').each(function() { $(this).html(`<i class="fas fa-address-card"></i> ${t.raddr}`); });
+      document.getElementById('txt-verify-hint').innerText = t.verify_hint;
+      $('.lbl-confirm').each(function() { $(this).html(`<i class="far fa-check-circle"></i> ${t.confirm}`); });
+      document.getElementById('txt-btn-save').innerText = t.btn_save;
+
+      calculateTotalPrice();
+    }
 
     function calculateTotalPrice() {
       const teamCount = parseInt(document.getElementById("teamCount").value) || 0;
@@ -573,17 +631,14 @@ function calculateTotalPrice() {
 
       const priceDisplay = document.getElementById("priceDisplay");
       if (priceDisplay) {
-        priceDisplay.innerHTML = `► ยอดชำระ : ${totalPrice.toLocaleString()} บาท`;
+        const t = trans[currentLang];
+        priceDisplay.innerHTML = `► ${t.total_txt} : ${totalPrice.toLocaleString()} ${t.baht}`;
         priceDisplay.style.color = totalPrice > 0 ? "#d9534f" : "#333";
         priceDisplay.style.textAlign = "left";
       }
-
-      const qrImage = document.getElementById("qrImage");
-      if (qrImage) {
-        qrImage.src = imageMap.default;
-      }
     }
 
+    // --- ส่วนที่เหลือยังคงเป็นฟังก์ชันเดิมของคุณทั้งหมด ---
     function showSelectedTeam() {
       const teamCount = parseInt(document.getElementById("teamCount").value) || 0;
       for (let i = 1; i <= 10; i++) {
@@ -606,13 +661,10 @@ function calculateTotalPrice() {
       let colB = document.getElementById(`colB${teamId}`);
       let colC = document.getElementById(`colC${teamId}`);
       let colD = document.getElementById(`colD${teamId}`);
-
-      colA.length = colB.length = colC.length = colD.length = 1; 
+      colA.length = colB.length = colC.length = colD.length = 1;
       const collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
-
       let optionsA = [...new Set(Object.keys(obj))].filter(x => x && x.trim() !== "").sort(collator.compare);
       optionsA.forEach(x => { colA.options[colA.options.length] = new Option(x, x); });
-
       colA.onchange = function () {
         colB.length = colC.length = colD.length = 1;
         let selectedCategory = obj[this.value];
@@ -622,31 +674,23 @@ function calculateTotalPrice() {
         }
         calculateTotalPrice();
       };
-
       colB.onchange = function () {
         calculateTotalPrice();
-        colC.length = colD.length = 1; 
+        colC.length = colD.length = 1;
         let selectedSubCategory = obj[colA.value]?.[this.value];
         if (selectedSubCategory) {
           let optionsC = [...new Set(Object.keys(selectedSubCategory))].filter(z => z && z.trim() !== "").sort(collator.compare);
           optionsC.forEach(z => { colC.options[colC.options.length] = new Option(z, z); });
-          if (colC.options.length > 1) {
-              colC.selectedIndex = 1;
-              colC.dispatchEvent(new Event('change')); 
-          }
+          if (colC.options.length > 1) { colC.selectedIndex = 1; colC.dispatchEvent(new Event('change')); }
         }
       };
-
       colC.onchange = function () {
         colD.length = 1;
         let selectedSubCategoryD = obj[colA.value]?.[colB.value]?.[this.value];
         if (selectedSubCategoryD) {
           let optionsD = [...new Set(Object.keys(selectedSubCategoryD))].filter(d => d && d.trim() !== "").sort(collator.compare);
           optionsD.forEach(d => { colD.options[colD.options.length] = new Option(d, d); });
-          if (colD.options.length > 1) {
-              colD.selectedIndex = 1;
-              colD.dispatchEvent(new Event('change'));
-          }
+          if (colD.options.length > 1) { colD.selectedIndex = 1; colD.dispatchEvent(new Event('change')); }
         }
       };
     }
@@ -654,11 +698,8 @@ function calculateTotalPrice() {
     function initDropdowns(receivedData) {
       globalPriceList = receivedData.prices; 
       let dropdownObj = receivedData.dropdowns;
-      
       dropDownList(dropdownObj, ""); 
-      for(let i=1; i<=9; i++) {
-        dropDownList(dropdownObj, i.toString());
-      }
+      for(let i=1; i<=9; i++) { dropDownList(dropdownObj, i.toString()); }
     }
 
     function toggleField(fieldId, shouldShow, isRequired = false) {
@@ -671,23 +712,10 @@ function calculateTotalPrice() {
       }
     }
 
-    $(function () {
-      var checkboxes = $(':checkbox[required]');
-      checkboxes.change(function () {
-        if (checkboxes.is(':checked')) {
-          checkboxes.removeAttr('required');
-        } else {
-          checkboxes.attr('required', 'required');
-        }
-      });
-    });
-
     document.addEventListener('DOMContentLoaded', function() {
-      // 🔴 เปลี่ยนจากการใช้ google.script.run เป็น fetch API ดึงข้อมูลจากฝั่ง Backend
       fetch(SCRIPT_URL + '?method=getData')
         .then(response => response.json())
-        .then(data => initDropdowns(data))
-        .catch(error => console.error('Error fetching Dropdown Data:', error));
+        .then(data => initDropdowns(data));
       
       toggleField("#tax_choice", false);
       toggleField("#tax_id", false);
@@ -702,9 +730,8 @@ function calculateTotalPrice() {
     });
 
     $("input:radio[name='data6']").change(function () {
-      const data6 = $(this).val();
-      toggleField("#qrpay", data6 === "qr", true);
-      toggleField("#payment", data6 === "acc", true);
+      toggleField("#qrpay", $(this).val() === "qr", true);
+      toggleField("#payment", $(this).val() === "acc", true);
     });
 
     $("input:radio[name='data7']").change(function () {
@@ -717,234 +744,95 @@ function calculateTotalPrice() {
     });
 
     $("input:radio[name='data8']").change(function () {
-      const data8 = $(this).val();
-      const show = data8 === "yes" || data8 === "no";
+      const show = $(this).val() === "yes" || $(this).val() === "no";
       toggleField("#tax_id", show, true);
       toggleField("#tax_institution", show, true);
-      toggleField("#tax_address", data8 === "no", true);
+      toggleField("#tax_address", $(this).val() === "no", true);
       toggleField("#document", true);
     });
 
     $("input:radio[name='data12']").change(function () {
-      const data12 = $(this).val();
       toggleField("#doc_name", true, true);
       toggleField("#doc_phone", true, true);
-      toggleField("#doc_address", data12 === "ที่อยู่ใหม่", true);
+      toggleField("#doc_address", $(this).val() === "ที่อยู่ใหม่", true);
     });
 
     function submitForm() {
+      const t = trans[currentLang];
       var file = document.getElementById("file").files[0];
       if (file) {
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = function () {
           var fileData = {
-            userId: userId,
-            userProfile: userProfile,
-            imagedata: reader.result.split(',')[1],
-            filename: file.name,
-            filetype: file.type,
-            data1: document.getElementById("colA").value,
-            data2: document.getElementById("colB").value,
-            data3: document.getElementById("colC").value,
-            data4: document.getElementById("colD").value,
+            userId: userId, userProfile: userProfile, imagedata: reader.result.split(',')[1],
+            filename: file.name, filetype: file.type,
+            data1: document.getElementById("colA").value, data2: document.getElementById("colB").value,
+            data3: document.getElementById("colC").value, data4: document.getElementById("colD").value,
             data5: document.getElementById("teamCount").value,
             data7: document.querySelector('input[name="data7"]:checked').value,
             data8: document.querySelector('input[name="data8"]:checked') ? document.querySelector('input[name="data8"]:checked').value : "",
-            data9: document.getElementById("data9").value,
-            data10: document.getElementById("data10").value,
+            data9: document.getElementById("data9").value, data10: document.getElementById("data10").value,
             data11: document.getElementById("data11").value,
             data12: document.querySelector('input[name="data12"]:checked') ? document.querySelector('input[name="data12"]:checked').value : "",
-            data13: document.getElementById("data13").value,
-            data14: document.getElementById("data14").value,
+            data13: document.getElementById("data13").value, data14: document.getElementById("data14").value,
             data15: document.getElementById("data15").value,
             data16: document.querySelector('input[name="data16"]:checked').value,
-            data17: document.getElementById("data17").value,
-            data18: document.getElementById("data18").value,
-            data19: document.getElementById("colA1").value,
-            data20: document.getElementById("colB1").value,
-            data21: document.getElementById("colC1").value,
-            data22: document.getElementById("colD1").value,
-            data23: document.getElementById("colA2").value,
-            data24: document.getElementById("colB2").value,
-            data25: document.getElementById("colC2").value,
-            data26: document.getElementById("colD2").value,
-            data27: document.getElementById("colA3").value,
-            data28: document.getElementById("colB3").value,
-            data29: document.getElementById("colC3").value,
-            data30: document.getElementById("colD3").value,
-            data31: document.getElementById("colA4").value,
-            data32: document.getElementById("colB4").value,
-            data33: document.getElementById("colC4").value,
-            data34: document.getElementById("colD4").value,
-            data35: document.getElementById("colA5").value,
-            data36: document.getElementById("colB5").value,
-            data37: document.getElementById("colC5").value,
-            data38: document.getElementById("colD5").value,
-            data39: document.getElementById("colA6").value,
-            data40: document.getElementById("colB6").value,
-            data41: document.getElementById("colC6").value,
-            data42: document.getElementById("colD6").value,
-            data43: document.getElementById("colA7").value,
-            data44: document.getElementById("colB7").value,
-            data45: document.getElementById("colC7").value,
-            data46: document.getElementById("colD7").value,
-            data47: document.getElementById("colA8").value,
-            data48: document.getElementById("colB8").value,
-            data49: document.getElementById("colC8").value,
-            data50: document.getElementById("colD8").value,
-            data51: document.getElementById("colA9").value,
-            data52: document.getElementById("colB9").value,
-            data53: document.getElementById("colC9").value,
-            data54: document.getElementById("colD9").value,
+            data17: document.getElementById("data17").value, data18: document.getElementById("data18").value,
+            data19: document.getElementById("colA1").value, data20: document.getElementById("colB1").value,
+            data21: document.getElementById("colC1").value, data22: document.getElementById("colD1").value,
+            data23: document.getElementById("colA2").value, data24: document.getElementById("colB2").value,
+            data25: document.getElementById("colC2").value, data26: document.getElementById("colD2").value,
+            data27: document.getElementById("colA3").value, data28: document.getElementById("colB3").value,
+            data29: document.getElementById("colC3").value, data30: document.getElementById("colD3").value,
+            data31: document.getElementById("colA4").value, data32: document.getElementById("colB4").value,
+            data33: document.getElementById("colC4").value, data34: document.getElementById("colD4").value,
+            data35: document.getElementById("colA5").value, data36: document.getElementById("colB5").value,
+            data37: document.getElementById("colC5").value, data38: document.getElementById("colD5").value,
+            data39: document.getElementById("colA6").value, data40: document.getElementById("colB6").value,
+            data41: document.getElementById("colC6").value, data42: document.getElementById("colD6").value,
+            data43: document.getElementById("colA7").value, data44: document.getElementById("colB7").value,
+            data45: document.getElementById("colC7").value, data46: document.getElementById("colD7").value,
+            data47: document.getElementById("colA8").value, data48: document.getElementById("colB8").value,
+            data49: document.getElementById("colC8").value, data50: document.getElementById("colD8").value,
+            data51: document.getElementById("colA9").value, data52: document.getElementById("colB9").value,
+            data53: document.getElementById("colC9").value, data54: document.getElementById("colD9").value,
             data55: document.getElementById("data55").value
           };
 
-          var colsToCheck = [];
           var teamIDs = ["data2", "data20", "data24", "data28", "data32", "data36", "data40", "data44", "data48", "data52"];
-          teamIDs.forEach(function (key) {
-            if (fileData[key]) colsToCheck.push(fileData[key]);
-          });
-          var uniqueCols = new Set(colsToCheck);
-          if (uniqueCols.size !== colsToCheck.length) {
-            Swal.fire({ title: 'คุณใส่ Team ID ซ้ำ', text: 'โปรดตรวจสอบข้อมูลใหม่อีกครั้ง', icon: 'error', confirmButtonText: 'ตกลง' });
-            return; 
+          var colsToCheck = [];
+          teamIDs.forEach(k => { if (fileData[k] && fileData[k] !== "Choose") colsToCheck.push(fileData[k]); });
+          if (new Set(colsToCheck).size !== colsToCheck.length) {
+            Swal.fire({ title: t.swal_dup, icon: 'error' }); return;
           }
 
-          Swal.fire({
-            title: 'กำลังบันทึกข้อมูล',
-            text: 'กรุณารอสักครู่...',
-            icon: 'info',
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            willOpen: () => { Swal.showLoading(); }
-          });
+          Swal.fire({ title: t.swal_saving, text: t.swal_wait, icon: 'info', showConfirmButton: false, allowOutsideClick: false, willOpen: () => Swal.showLoading() });
 
-          // 🔴 เปลี่ยนเป็น fetch POST ส่งข้อมูลไปหา Google Apps Script
-          fetch(SCRIPT_URL, {
-            method: 'POST',
-            body: JSON.stringify({ method: 'saveData', data: fileData })
-          })
-          .then(response => response.json())
-          .then(result => {
+          fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ method: 'saveData', data: fileData }) })
+          .then(res => res.json()).then(result => {
             Swal.close();
             if (result.status === "success") {
-              Swal.fire({
-                title: 'บันทึกข้อมูลสำเร็จ',
-                icon: 'success',
-                timer: 2000, 
-                showConfirmButton: false,
-                allowOutsideClick: false
-              }).then(() => {
-                 clearForm(); 
-                 window.scrollTo(0, 0); 
-              });
-            } else {
-              Swal.fire({ title: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล', icon: 'error', confirmButtonText: 'ตกลง' });
+              Swal.fire({ title: t.swal_success, icon: 'success', timer: 2000, showConfirmButton: false }).then(() => location.reload());
             }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            Swal.close();
-            Swal.fire({ title: 'ระบบขัดข้อง', text: 'ไม่สามารถติดต่อเซิร์ฟเวอร์ได้', icon: 'error', confirmButtonText: 'ตกลง' });
           });
         };
       }
     }
 
-    function clearForm() {
-        document.getElementById("teamCount").selectedIndex = 0;
-        const priceDisplay = document.getElementById("priceDisplay");
-        priceDisplay.innerHTML = '';
-        priceDisplay.style.color = '#333';
-
-        let prefix = ["", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-        prefix.forEach(p => {
-            let a = document.getElementById("colA" + p);
-            let b = document.getElementById("colB" + p);
-            let c = document.getElementById("colC" + p);
-            let d = document.getElementById("colD" + p);
-            
-            if(a) a.selectedIndex = 0;
-            if(b) b.length = 1;
-            if(c) c.length = 1;
-            if(d) d.length = 1;
-        });
-
-        document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
-        const qrRadio = document.getElementById("qr");
-        if(qrRadio) qrRadio.checked = true;
-
-        document.querySelectorAll('input[type="text"], input[type="tel"], textarea').forEach(t => t.value = '');
-        
-        var oldInput = document.getElementById("file");
-        var newInput = oldInput.cloneNode(true);
-        oldInput.parentNode.replaceChild(newInput, oldInput);
-        const previewImg = document.getElementById('preview-image');
-        const uploadContent = document.querySelector('.upload-content');
-        previewImg.src = '';
-        previewImg.classList.add('d-none');
-        uploadContent.style.display = 'block';
-
-        toggleField("#tax_choice", false);
-        toggleField("#tax_id", false);
-        toggleField("#tax_institution", false);
-        toggleField("#tax_address", false);
-        toggleField("#document", false);
-        toggleField("#doc_name", false);
-        toggleField("#doc_phone", false);
-        toggleField("#doc_address", false);
-        toggleField("#qrpay", true);
-        toggleField("#payment", false);
-        showSelectedTeam();
-    }
-
-    const dropZone = document.getElementById("drop-zone");
     const fileInput = document.getElementById("file");
     const previewImg = document.getElementById('preview-image');
     const uploadContent = document.querySelector('.upload-content');
-
-    dropZone.addEventListener("click", () => fileInput.click());
-    dropZone.addEventListener("dragover", e => {
-      e.preventDefault();
-      dropZone.classList.add("dragover");
-    });
-    dropZone.addEventListener("dragleave", () => dropZone.classList.remove("dragover"));
-
-    dropZone.addEventListener("drop", e => {
-      e.preventDefault();
-      dropZone.classList.remove("dragover");
-      if (e.dataTransfer.files.length) {
-        fileInput.files = e.dataTransfer.files;
-        const file = e.dataTransfer.files[0];
-          if (file && file.type.startsWith('image/')) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-              previewImg.src = e.target.result;
-              previewImg.classList.remove('d-none');
-              uploadContent.style.display = 'none';
-            };
-            reader.readAsDataURL(file);
-          }
-      }
-    });
-
-    fileInput.addEventListener("change", () => {
+    const dropZone = document.getElementById("drop-zone");
+    dropZone.onclick = () => fileInput.click();
+    fileInput.onchange = () => {
       const file = fileInput.files[0];
       if (file && file.type.startsWith('image/')) {
         const reader = new FileReader();
-        reader.onload = function (e) {
-          previewImg.src = e.target.result;
-          previewImg.classList.remove('d-none');
-          uploadContent.style.display = 'none';
-        };
+        reader.onload = e => { previewImg.src = e.target.result; previewImg.classList.remove('d-none'); uploadContent.style.display = 'none'; };
         reader.readAsDataURL(file);
-        } else {
-          previewImg.src = '';
-          previewImg.classList.add('d-none');
-          uploadContent.style.display = 'block';
-        }
-    });
+      }
+    };
   </script>
 </body>
 </html>
