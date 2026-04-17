@@ -186,20 +186,20 @@
         <p class="fs-6 mb-2"> ● <span id="txt-step4">หากท่านมีข้อสงสัยหรือสอบถามข้อมูลเพิ่มเติม สามารถติดต่อได้ที่เบอร์ 02-459-4731 ต่อ 232 หรือ Line OA : @wrothailand (ในวันทำการ จันทร์-ศุกร์ เวลา 8.30 - 17.00 น.)</span>
         </p>
         <hr>
-        <p class="fs-6 mb-3" style="color: red;"><i class="fa-regular fa-bookmark"></i><strong id="txt-select-team"> เลือกจำนวนทีมที่ท่านต้องการชำระเงิน (Select the number of teams you want to pay for)</strong></p>
+        <p class="fs-6 mb-3" style="color: red;"><i class="fa-regular fa-bookmark"></i><strong id="txt-select-team"> เลือกจำนวนทีมที่ท่านต้องการชำระเงิน</strong></p>
         <div class="form-group col-md-4 d-flex flex-column mb-3">
           <select id="teamCount" class="fs-5" style="width: 300px; height: 40px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 5px;" onchange="showSelectedTeam()">
             <option value="" selected disabled id="txt-dropdown-hint">-- กรุณาเลือก --</option>
-            <option value="1">1 ทีม</option>
-            <option value="2">2 ทีม</option>
-            <option value="3">3 ทีม</option>
-            <option value="4">4 ทีม</option>
-            <option value="5">5 ทีม</option>
-            <option value="6">6 ทีม</option>
-            <option value="7">7 ทีม</option>
-            <option value="8">8 ทีม</option>
-            <option value="9">9 ทีม</option>
-            <option value="10">10 ทีม</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
           </select>
         </div>
       </div>
@@ -212,28 +212,28 @@
           <div class="card-custom hidden-team" id="team${i}">
             <div class="team-header-banner"><strong class="fs-5">Team ${i}</strong></div>
             <div class="card-body-padding">
-              <div class="alert-info-text alert-team-info"><i class="fa-solid fa-circle-info"></i> ประเภท Robomission และ Future Innovators โปรดเลือกรุ่นอายุ (Age Group) ตามข้อมูลของทีม</div>
+              <div class="alert-info-text alert-team-info"><i class="fa-solid fa-circle-info"></i> ประเภท Robomission และ Future Innovators ให้เลือกรุ่นอายุ (Age Group)</div>
               <div class="row g-3">
                 <div class="col-md-6">
-                  <label class="form-label-custom lbl-age"><i class="fa-solid fa-graduation-cap"></i> รุ่นอายุ / Age Group</label>
+                  <label class="form-label-custom lbl-age"><i class="fa-solid fa-graduation-cap"></i> รุ่นอายุ</label>
                   <select class="form-select-custom" id="colA${suffix}" ${requiredAttr}>
                     <option value="" selected>Choose</option>
                   </select>
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label-custom lbl-tid"><i class="fa-solid fa-id-badge"></i> ทีมไอดี / Team ID</label>
+                  <label class="form-label-custom lbl-tid"><i class="fa-solid fa-id-badge"></i> ทีมไอดี</label>
                   <select class="form-select-custom" id="colB${suffix}" ${requiredAttr}>
                     <option value="" selected>Choose</option>
                   </select>
                 </div>
                 <div class="col-md-5">
-                  <label class="form-label-custom lbl-tname"><i class="fa-solid fa-pen-to-square"></i> ชื่อทีม / Team Name</label>
+                  <label class="form-label-custom lbl-tname"><i class="fa-solid fa-pen-to-square"></i> ชื่อทีม</label>
                   <select class="form-select-custom" id="colC${suffix}" ${requiredAttr}>
                     <option value=""></option>
                   </select>
                 </div>
                 <div class="col-md-7">
-                  <label class="form-label-custom lbl-inst"><i class="fa-solid fa-building-columns"></i> สถาบัน / Institution</label>
+                  <label class="form-label-custom lbl-inst"><i class="fa-solid fa-building-columns"></i> สถาบัน</label>
                   <select class="form-select-custom" id="colD${suffix}">
                     <option value=""></option>
                   </select>
@@ -253,11 +253,11 @@
             <p class="fw-bold custom-bold" style="font-size: 16px;"><i class="fa-solid fa-caret-right"></i> <span id="txt-pay-method">เลือกวิธีชำระเงิน</span> <span style="color: #888; font-size: 16px;">(Choose a payment method)</span></p>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="data6" id="qr" value="qr" required checked>
-              <label class="form-check-label" for="qr" style="font-size: 16px;" id="txt-pay-qr">ชำระด้วย QR Code / Payment with QR Code</label>
+              <label class="form-check-label" for="qr" style="font-size: 16px;" id="txt-pay-qr">ชำระด้วย QR Code</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="data6" id="acc" value="acc" required>
-              <label class="form-check-label" for="acc" style="font-size: 16px;" id="txt-pay-acc">ชำระผ่านบัญชีธนาคาร / Payment via bank transfer</label>
+              <label class="form-check-label" for="acc" style="font-size: 16px;" id="txt-pay-acc">ชำระผ่านบัญชีธนาคาร</label>
             </div>
           </div>
         </div>
@@ -268,8 +268,8 @@
             <img src="https://img2.pic.in.th/270746805_10161735880783916_2146008855314507829_n.jpeg" alt="Krung Thai Bank" style="width: 70px; height: auto; margin-top: 10px;">
           </div>
           <div class="col">
-            <p style="font-size: 16px;" class="mb-2"><strong id="txt-bank-name">ธนาคารกรุงไทย / Krung Thai Bank</strong></p>
-            <p style="font-size: 16px;" class="mb-2" id="txt-acc-name">ชื่อบัญชี : บริษัท แกมมาโก้ (ประเทศไทย) จำกัด / GAMMACO (THAILAND) CO.,LTD.</p>
+            <p style="font-size: 16px;" class="mb-2"><strong id="txt-bank-name">ธนาคารกรุงไทย</strong></p>
+            <p style="font-size: 16px;" class="mb-2" id="txt-acc-name">ชื่อบัญชี : บริษัท แกมมาโก้ (ประเทศไทย) จำกัด</p>
             <p style="font-size: 16px;" class="mb-2" id="txt-acc-no">เลขบัญชี : 980-2-99645-9</p>
           </div>
         </div>
@@ -281,7 +281,7 @@
 
         <div class="row my-2 mx-auto">
           <div class="form-group col-md-12 d-flex flex-column mb-3">
-            <label for="file" class="fw-bold" style="font-size: 16px;"><i class="fas fa-upload"></i> <span id="txt-upload-label">อัพโหลดใบเสร็จค่าลงทะเบียน (Upload Pay Slip)</span></label>
+            <label for="file" class="fw-bold" style="font-size: 16px;"><i class="fas fa-upload"></i> <span id="txt-upload-label">อัพโหลดใบเสร็จค่าลงทะเบียน</span></label>
             <br>
             <div id="drop-zone" class="drop-zone text-center position-relative">
               <div class="upload-content">
@@ -302,15 +302,15 @@
         <div class="row my-2 mx-auto">
           <p class="fw-bold custom-bold" style="font-size: 16px;"><i class="fa-solid fa-caret-right"></i> <span id="txt-contact-title">ข้อมูลติดต่อ : </span> <span class="text-muted" style="font-size: 16px;">(Contact Details:)</span></p>
           <div class="form-group col-md-5" id="contact_name">
-            <label class="mb-2 lbl-cname" for="data17" style="font-size: 16px;"><i class="fa-solid fa-circle-user"></i> ชื่อ-สกุล / Name-Surname <span class="text-danger">*</span></label>
+            <label class="mb-2 lbl-cname" for="data17" style="font-size: 16px;"><i class="fa-solid fa-circle-user"></i> ชื่อ-สกุล<span class="text-danger">*</span></label>
             <input type="text" class="form-control" id="data17" placeholder="ชื่อ-นามสกุล" style="font-size: 16px;" required>
           </div>
           <div class="form-group col-md-4" id="contact_phone">
-            <label class="mb-2 lbl-cphone" for="data18" style="font-size: 16px;"><i class="fa-solid fa-phone"></i> เบอร์โทรศัพท์ / Phone No. <span class="text-danger">*</span></label>
+            <label class="mb-2 lbl-cphone" for="data18" style="font-size: 16px;"><i class="fa-solid fa-phone"></i> เบอร์โทรศัพท์<span class="text-danger">*</span></label>
             <input type="text" class="form-control" id="data18" placeholder="เบอร์โทรศัพท์ที่สามารถติดต่อได้" style="font-size: 16px;" required>
           </div>
           <div class="form-group col-md-3" id="contact_lineid">
-            <label class="mb-2 lbl-cline" for="data55" style="font-size: 16px;"><i class="fa-brands fa-line"></i> ไลน์ไอดี / Line ID</label>
+            <label class="mb-2 lbl-cline" for="data55" style="font-size: 16px;"><i class="fa-brands fa-line"></i> ไลน์ไอดี</label>
             <input type="text" class="form-control" id="data55" placeholder="Line ID" style="font-size: 16px;">
           </div>
         </div>
@@ -320,15 +320,15 @@
             <p class="fw-bold custom-bold"><i class="fa-solid fa-caret-right"></i> <span id="txt-doc-title">การออกเอกสาร : </span> <span class="text-muted"> (Document Issuance)</span> ? </p>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="data7" id="tax" value="ใบกำกับภาษี" required>
-              <label class="form-check-label lbl-doc-tax" for="tax"> ใบกำกับภาษี / Tax invoice</label>
+              <label class="form-check-label lbl-doc-tax" for="tax"> ใบกำกับภาษี</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="data7" id="bill" value="ใบเสร็จรับเงิน" required>
-              <label class="form-check-label lbl-doc-bill" for="bill"> ใบเสร็จรับเงิน / Receipt</label>
+              <label class="form-check-label lbl-doc-bill" for="bill"> ใบเสร็จรับเงิน</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="data7" id="no" value="ไม่รับ" required>
-              <label class="form-check-label lbl-doc-no" for="no"> ไม่ต้องการ / No</label>
+              <label class="form-check-label lbl-doc-no" for="no"> ไม่ต้องการ</label>
             </div>
           </div>
         </div>
@@ -337,27 +337,27 @@
             <p class="fw-bold text-bold"><i class="fa-solid fa-caret-right"></i> <span id="txt-tax-history">บริษัทของท่าน เคยออกใบกำกับภาษีกับทางบริษัทฯ แล้วหรือไม่ </span> <span class="text-muted">(Has your company previously issued a tax invoice to our company)</span>?</p>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="data8" id="yes" value="yes" >
-              <label class="form-check-label lbl-yes" for="yes">เคย / Yes</label>
+              <label class="form-check-label lbl-yes" for="yes">เคย</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="data8" id="no" value="no" >
-              <label class="form-check-label lbl-no" for="no">ไม่เคย / No</label>
+              <label class="form-check-label lbl-no" for="no">ไม่เคย</label>
             </div>
           </div>
         </div>
         <div class="row my-2 mx-auto">
           <div class="form-group col-md-6 mb-3" id="tax_institution">
-            <label class="mb-2 lbl-comp" for="tax_institution"><i class="far fa-building"></i> ชื่อบริษัท / Company Name</label>
+            <label class="mb-2 lbl-comp" for="tax_institution"><i class="far fa-building"></i> ชื่อบริษัท</label>
             <input type="text" class="form-control" id="data9" placeholder="ระบุชื่อหน่วยงาน / สถาบัน" >
           </div>
           <div class="form-group col-md-6" id="tax_id"> 
-            <label class="mb-2 lbl-taxid" for="tax_id"><i class="far fa-address-card"></i> เลขประจำตัวผู้เสียภาษี / Tax ID</label>
+            <label class="mb-2 lbl-taxid" for="tax_id"><i class="far fa-address-card"></i> เลขประจำตัวผู้เสียภาษี</label>
             <input type="number" class="form-control" id="data10" placeholder="ระบุเลขที่ผู้เสียภาษี" minlength="13" maxlength="13">
           </div>
         </div>
         <div class="row my-2 mx-auto" id="tax_address">
           <div class="form-group col-md-12 mb-2">
-            <label class="mb-2 lbl-addr" for="tax_address"><i class="fas fa-address-card"></i> ที่อยู่ / Address</label>
+            <label class="mb-2 lbl-addr" for="tax_address"><i class="fas fa-address-card"></i> ที่อยู่</label>
             <textarea class="form-control" rows="3" id="data11" placeholder="โปรดระบุที่อยู่"></textarea>
           </div>
         </div>
@@ -378,17 +378,17 @@
 
         <div class="row my-2 mx-auto" >
           <div class="form-group col-md-6" id="doc_name">
-            <label class="mb-2 lbl-rname" for="doc_name"><i class="fas fa-user"></i> ชื่อ-สกุล / Name-Surname (ผู้รับเอกสาร)</label>
+            <label class="mb-2 lbl-rname" for="doc_name"><i class="fas fa-user"></i> ชื่อ-สกุล (ผู้รับเอกสาร)</label>
             <input type="text" class="form-control" id="data13" placeholder="Name">
           </div>
           <div class="form-group col-md-6" id="doc_phone">
-            <label class="mb-2 lbl-rphone" for="doc_phone"><i class="fas fa-mobile-alt"></i> เบอร์โทรศัพท์ / Phone No.</label>
+            <label class="mb-2 lbl-rphone" for="doc_phone"><i class="fas fa-mobile-alt"></i> เบอร์โทรศัพท์ติดต่อ</label>
             <input type="tel" class="form-control" id="data14" placeholder="เบอร์โทร" >
           </div>
         </div>
         <div class="row my-2 mx-auto" id="doc_address">
           <div class="form-group col-md-12">
-            <label class="mb-2 lbl-raddr" for="doc_address"><i class="fas fa-address-card"></i> ที่อยู่ / Address</label>
+            <label class="mb-2 lbl-raddr" for="doc_address"><i class="fas fa-address-card"></i> ที่อยู่จัดส่ง</label>
             <textarea class="form-control" rows="3" id="data15" placeholder="Address"></textarea>
           </div>
         </div>
@@ -408,11 +408,11 @@
       <br>          
 
       <div class="form-group text-center my-3">
-        <button type="submit" class="btn btn-danger btn-block" id="btn1"><i class="fas fa-save"></i> <span id="txt-btn-save">บันทึกข้อมูล</span></button>
+        <button type="submit" class="btn btn-danger btn-block" id="btn1"><i class="fas fa-save"></i> <span id="txt-btn-save">บันทึก</span></button>
       </div>
     </form>
 
-    <p class="mb-0" style="font-size: 14px; font-weight: bold; text-align: right;">Ver. 2026-8.3</p>
+    <p class="mb-0" style="font-size: 14px; font-weight: bold; text-align: right;">Ver. 2026-8.4</p>
     <div class="card-footer" style="background: linear-gradient(90deg, #00744d, #00a36c); color: white; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 0 0 10px 10px;">
       <p class="text-center mb-0" style="font-size: 14px;"><strong>Organized by Gammaco (Thailand) Co., LTD.</strong></p>
     </div>
@@ -434,53 +434,53 @@
     let currentLang = 'th';
     const trans = {
       th: {
-        main_title: "ชำระเงินค่าลงทะเบียนแข่งขัน ฯ / Pay Registration",
-        step_title: "ขั้นตอนการชำระเงิน (Payment Procedure)",
+        main_title: "ชำระเงินค่าลงทะเบียนแข่งขัน ฯ",
+        step_title: "ขั้นตอนการชำระเงิน",
         step1: "เลือกจำนวนทีมที่ต้องการชำระเงิน",
         step1_note: "(ท่านสามารถชำระค่าลงทะเบียนได้มากกว่า 1 ทีม โดยทีมที่เลือกจะต้องมาจากสถาบันเดียวกันเท่านั้น)",
         step2: "เลือกวิธีชำระเงิน โดยสามารถเลือกชำระผ่าน QR Code หรือ เลขบัญชีธนาคาร",
         step3: "อัพโหลดใบเสร็จ และเลือกขอใบกำกับภาษี หรือ ใบเสร็จรับเงิน หรือ ไม่ต้องการ และบันทึกข้อมูล",
         step4: "หากท่านมีข้อสงสัยหรือสอบถามข้อมูลเพิ่มเติม สามารถติดต่อได้ที่เบอร์ 02-459-4731 ต่อ 232 หรือ Line OA : @wrothailand (ในวันทำการ จันทร์-ศุกร์ เวลา 8.30 - 17.00 น.)",
-        select_team: " เลือกจำนวนทีมที่ท่านต้องการชำระเงิน (Select the number of teams you want to pay for)",
+        select_team: " เลือกจำนวนทีมที่ท่านต้องการชำระเงิน",
         dropdown_hint: "-- กรุณาเลือก --",
-        team_info: "ประเภท Robomission และ Future Innovators โปรดเลือกรุ่นอายุ (Age Group) ตามข้อมูลของทีม",
-        lbl_age: "รุ่นอายุ / Age Group",
-        lbl_tid: "ทีมไอดี / Team ID",
-        lbl_tname: "ชื่อทีม / Team Name",
-        lbl_inst: "สถาบัน / Institution",
+        team_info: "ประเภท Robomission และ Future Innovators เลือกรุ่นอายุ (Age Group)",
+        lbl_age: "รุ่นอายุ",
+        lbl_tid: "ทีมไอดี",
+        lbl_tname: "ชื่อทีม",
+        lbl_inst: "สถาบัน",
         pay_method: "เลือกวิธีชำระเงิน",
-        pay_qr: "ชำระด้วย QR Code / Payment with QR Code",
-        pay_acc: "ชำระผ่านบัญชีธนาคาร / Payment via bank transfer",
-        bank_name: "ธนาคารกรุงไทย / Krung Thai Bank",
-        acc_name: "ชื่อบัญชี : บริษัท แกมมาโก้ (ประเทศไทย) จำกัด / GAMMACO (THAILAND) CO.,LTD.",
+        pay_qr: "ชำระด้วย QR Code",
+        pay_acc: "ชำระผ่านบัญชีธนาคาร",
+        bank_name: "ธนาคารกรุงไทย",
+        acc_name: "ชื่อบัญชี : บริษัท แกมมาโก้ (ประเทศไทย) จำกัด",
         acc_no: "เลขบัญชี : 980-2-99645-9",
-        upload_label: "อัพโหลดใบเสร็จค่าลงทะเบียน (Upload Pay Slip)",
+        upload_label: "อัพโหลดใบเสร็จ",
         upload_title: "Upload a File",
         upload_hint: "Drag and drop files here or click to upload",
         contact_title: "ข้อมูลติดต่อ : ",
-        cname: "ชื่อ-สกุล / Name-Surname *",
-        cphone: "เบอร์โทรศัพท์ / Phone No. *",
-        cline: "ไลน์ไอดี / Line ID",
+        cname: "ชื่อ-สกุล *",
+        cphone: "เบอร์โทรศัพท์ *",
+        cline: "ไลน์ไอดี",
         doc_title: "การออกเอกสาร : ",
-        doc_tax: " ใบกำกับภาษี / Tax invoice",
-        doc_bill: " ใบเสร็จรับเงิน / Receipt",
-        doc_no: " ไม่ต้องการ / No",
+        doc_tax: " ใบกำกับภาษี",
+        doc_bill: " ใบเสร็จรับเงิน",
+        doc_no: " ไม่ต้องการ",
         tax_history: "บริษัทของท่าน เคยออกใบกำกับภาษีกับทางบริษัทฯ แล้วหรือไม่ ",
-        yes: "เคย / Yes",
-        no: "ไม่เคย / No",
-        comp: " ชื่อบริษัท / Company Name",
-        taxid: " เลขประจำตัวผู้เสียภาษี / Tax ID",
-        addr: " ที่อยู่ / Address",
+        yes: "เคย",
+        no: "ไม่เคย",
+        comp: " ชื่อบริษัท / หน่วยงาน",
+        taxid: " เลขประจำตัวผู้เสียภาษี",
+        addr: " ที่อยู่",
         delivery: "การจัดส่งเอกสาร ",
-        del_bill: "จัดส่งตามที่อยู่เอกสาร (Billing address)",
-        del_new: "ที่อยู่ใหม่ (New Address)",
-        rname: " ชื่อ-สกุล / Name-Surname (ผู้รับเอกสาร)",
-        rphone: " เบอร์โทรศัพท์ / Phone No.",
-        raddr: " ที่อยู่ / Address",
-        verify_hint: " * โปรดตรวจสอบความถูกต้องก่อนทำการส่งข้อมูล (Please verify the accuracy before submitting the information.)",
-        confirm: " ข้าพเจ้าได้กรอกข้อมูลครบถ้วนแล้ว (I have completed filling out all the required information.)",
-        btn_save: "บันทึกข้อมูล",
-        total_txt: "จำนวนเงินที่ชำระ",
+        del_bill: "จัดส่งตามที่อยู่เอกสาร",
+        del_new: "ที่อยู่ใหม่",
+        rname: " ชื่อ-สกุล (ผู้รับเอกสาร)",
+        rphone: " เบอร์โทรศัพท์ติดต่อ",
+        raddr: " ที่อยู่",
+        verify_hint: " * โปรดตรวจสอบความถูกต้องก่อนทำการส่งข้อมูล",
+        confirm: " ข้าพเจ้าได้กรอกข้อมูลครบถ้วนแล้ว",
+        btn_save: "บันทึก",
+        total_txt: "จำนวนเงิน",
         baht: "บาท",
         swal_saving: "กำลังบันทึกข้อมูล",
         swal_wait: "กรุณารอสักครู่...",
@@ -533,7 +533,7 @@
         raddr: " Address",
         verify_hint: " * Please verify the accuracy before submitting.",
         confirm: " I have completed all the required information.",
-        btn_save: "Save Data",
+        btn_save: "Save",
         total_txt: "Total Amount",
         baht: "THB",
         swal_saving: "Saving Data",
